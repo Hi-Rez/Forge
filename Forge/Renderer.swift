@@ -43,7 +43,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     open func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.resize(size)
+        self.resize((width:Float(size.width), height:Float(size.height)))
     }
     
     deinit { self.cleanup() }
@@ -78,7 +78,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func draw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {}
     
-    open func resize(_ size: CGSize) {}
+    open func resize(_ size: (width: Float, height: Float)) {}
     
     open func cleanup() {}
 }
