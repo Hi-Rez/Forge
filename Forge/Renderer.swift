@@ -27,9 +27,9 @@ open class Renderer: NSObject, MTKViewDelegate {
         guard let queue = self.device.makeCommandQueue() else { return nil }
         self.commandQueue = queue
         
-        metalKitView.depthStencilPixelFormat = depthStencilPixelFormat
-        metalKitView.colorPixelFormat = colorPixelFormat
-        metalKitView.sampleCount = sampleCount
+        metalKitView.depthStencilPixelFormat = self.depthStencilPixelFormat
+        metalKitView.colorPixelFormat = self.colorPixelFormat
+        metalKitView.sampleCount = self.sampleCount
         
         super.init()
         
@@ -43,7 +43,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     open func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.resize((width:Float(size.width), height:Float(size.height)))
+        self.resize((width: Float(size.width), height: Float(size.height)))
     }
     
     deinit { self.cleanup() }
@@ -63,8 +63,6 @@ open class Renderer: NSObject, MTKViewDelegate {
         commandBuffer.addCompletedHandler { (_) -> Swift.Void in
             semaphore.signal()
         }
-        
-        
         
         return commandBuffer
     }
