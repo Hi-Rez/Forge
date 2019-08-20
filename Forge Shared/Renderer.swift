@@ -22,7 +22,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
         
-    public init?(metalKitView: MTKView) {
+    public required init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
         self.mtkView = metalKitView
         

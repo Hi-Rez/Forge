@@ -11,6 +11,9 @@
 		E19FA5FE22E7D84E00A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
 		E19FA61E22E8B51000A43BB4 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
+		E1DF8236230B72050065F348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8235230B72050065F348 /* ViewController.swift */; };
+		E1DF8237230B72050065F348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8235230B72050065F348 /* ViewController.swift */; };
+		E1DF823C230B730C0065F348 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF823B230B730C0065F348 /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,8 @@
 		E19FA5EA22E7D6D900A43BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E19FA61622E8B4F100A43BB4 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DF8235230B72050065F348 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E1DF823B230B730C0065F348 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +47,11 @@
 		E19FA5DC22E7D6D900A43BB4 = {
 			isa = PBXGroup;
 			children = (
-				E19FA5E822E7D6D900A43BB4 /* Forge */,
+				E1DF8241230B77E50065F348 /* Forge */,
+				E19FA5E822E7D6D900A43BB4 /* Forge Shared */,
+				E1DF8238230B729D0065F348 /* Forge iOS */,
+				E1DF823A230B72B90065F348 /* Forge tvOS */,
+				E1DF8239230B72AF0065F348 /* Forge macOS */,
 				E19FA5E722E7D6D900A43BB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +65,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E19FA5E822E7D6D900A43BB4 /* Forge */ = {
+		E19FA5E822E7D6D900A43BB4 /* Forge Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E19FA5E922E7D6D900A43BB4 /* Forge.h */,
-				E19FA5EA22E7D6D900A43BB4 /* Info.plist */,
 				E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */,
+				E1DF8235230B72050065F348 /* ViewController.swift */,
+			);
+			path = "Forge Shared";
+			sourceTree = "<group>";
+		};
+		E1DF8238230B729D0065F348 /* Forge iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Forge iOS";
+			sourceTree = "<group>";
+		};
+		E1DF8239230B72AF0065F348 /* Forge macOS */ = {
+			isa = PBXGroup;
+			children = (
+				E1DF823B230B730C0065F348 /* ViewController.xib */,
+			);
+			path = "Forge macOS";
+			sourceTree = "<group>";
+		};
+		E1DF823A230B72B90065F348 /* Forge tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Forge tvOS";
+			sourceTree = "<group>";
+		};
+		E1DF8241230B77E50065F348 /* Forge */ = {
+			isa = PBXGroup;
+			children = (
+				E19FA5EA22E7D6D900A43BB4 /* Info.plist */,
+				E19FA5E922E7D6D900A43BB4 /* Forge.h */,
 			);
 			path = Forge;
 			sourceTree = "<group>";
@@ -166,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DF823C230B730C0065F348 /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DF8236230B72050065F348 /* ViewController.swift in Sources */,
 				E19FA5FE22E7D84E00A43BB4 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1DF8237230B72050065F348 /* ViewController.swift in Sources */,
 				E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
