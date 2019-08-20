@@ -13,6 +13,7 @@ import simd
 public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
+    public weak var mtkView: MTKView!;
     public let device: MTLDevice
     public let commandQueue: MTLCommandQueue
     public var sampleCount: Int = 1
@@ -20,9 +21,10 @@ open class Renderer: NSObject, MTKViewDelegate {
     public var depthStencilPixelFormat: MTLPixelFormat = .invalid
     
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
-    
+        
     public init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
+        self.mtkView = metalKitView
         
         guard let queue = self.device.makeCommandQueue() else { return nil }
         self.commandQueue = queue
@@ -30,7 +32,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         metalKitView.depthStencilPixelFormat = self.depthStencilPixelFormat
         metalKitView.colorPixelFormat = self.colorPixelFormat
         metalKitView.sampleCount = self.sampleCount
-        
+
         super.init()
         
         self.setup()
