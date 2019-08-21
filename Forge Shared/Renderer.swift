@@ -13,7 +13,7 @@ import simd
 public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
-    public weak var mtkView: MTKView!;
+    public weak var mtkView: MTKView!
     public let device: MTLDevice
     public let commandQueue: MTLCommandQueue
     public var sampleCount: Int = 1
@@ -21,7 +21,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     public var depthStencilPixelFormat: MTLPixelFormat = .invalid
     
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
-        
+    
     public required init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
         self.mtkView = metalKitView
@@ -32,7 +32,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         metalKitView.depthStencilPixelFormat = self.depthStencilPixelFormat
         metalKitView.colorPixelFormat = self.colorPixelFormat
         metalKitView.sampleCount = self.sampleCount
-
+        
         super.init()
         
         self.setup()
@@ -49,11 +49,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     deinit { self.cleanup() }
-    
-    open func setup() {}
-    
-    open func update() {}
-    
+        
     open func preDraw() -> MTLCommandBuffer? {
         self.update()
         
@@ -76,9 +72,43 @@ open class Renderer: NSObject, MTKViewDelegate {
         commandBuffer.commit()
     }
     
+    open func setup() {}
+    
+    open func update() {}
+    
     open func draw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {}
     
     open func resize(_ size: (width: Float, height: Float)) {}
     
     open func cleanup() {}
+    
+    open func touchesBegan(with event: NSEvent) {}
+    
+    open func touchesEnded(with event: NSEvent) {}
+    
+    open func touchesMoved(with event: NSEvent) {}
+    
+    open func touchesCancelled(with event: NSEvent) {}
+    
+    open func scrollWheel(with event: NSEvent) {}
+    
+    open func mouseMoved(with event: NSEvent) {}
+    
+    open func mouseDown(with event: NSEvent) {}
+    
+    open func mouseDragged(with event: NSEvent) {}
+    
+    open func mouseUp(with event: NSEvent) {}
+    
+    open func mouseEntered(with event: NSEvent) {}
+    
+    open func mouseExited(with event: NSEvent) {}
+    
+    open func keyDown(with event: NSEvent) {}
+    
+    open func keyUp(with event: NSEvent) {}
+        
+    open func magnify(with event: NSEvent) {}
+    
+    open func rotate(with event: NSEvent) {}
 }
