@@ -51,10 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				E1DF8241230B77E50065F348 /* Forge */,
-				E19FA5E822E7D6D900A43BB4 /* Forge Shared */,
-				E1DF8238230B729D0065F348 /* Forge iOS */,
-				E1DF823A230B72B90065F348 /* Forge tvOS */,
-				E1DF8239230B72AF0065F348 /* Forge macOS */,
 				E19FA5E722E7D6D900A43BB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +101,10 @@
 			children = (
 				E19FA5EA22E7D6D900A43BB4 /* Info.plist */,
 				E19FA5E922E7D6D900A43BB4 /* Forge.h */,
+				E19FA5E822E7D6D900A43BB4 /* Forge Shared */,
+				E1DF8238230B729D0065F348 /* Forge iOS */,
+				E1DF823A230B72B90065F348 /* Forge tvOS */,
+				E1DF8239230B72AF0065F348 /* Forge macOS */,
 			);
 			path = Forge;
 			sourceTree = "<group>";
