@@ -92,36 +92,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E19FA5E822E7D6D900A43BB4 /* Forge Shared */ = {
+		E19FA5E822E7D6D900A43BB4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */,
 			);
-			path = "Forge Shared";
+			path = Shared;
 			sourceTree = "<group>";
 		};
-		E1DF8238230B729D0065F348 /* Forge iOS */ = {
+		E1DF8238230B729D0065F348 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Forge iOS";
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		E1DF8239230B72AF0065F348 /* Forge macOS */ = {
+		E1DF8239230B72AF0065F348 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
 				E1DF8235230B72050065F348 /* ViewController.swift */,
 				E1DF8244230C9DBB0065F348 /* View.swift */,
 				E1DF823B230B730C0065F348 /* ViewController.xib */,
 			);
-			path = "Forge macOS";
+			path = macOS;
 			sourceTree = "<group>";
 		};
-		E1DF823A230B72B90065F348 /* Forge tvOS */ = {
+		E1DF823A230B72B90065F348 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Forge tvOS";
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 		E1DF8241230B77E50065F348 /* Forge */ = {
@@ -129,10 +129,10 @@
 			children = (
 				E19FA5EA22E7D6D900A43BB4 /* Info.plist */,
 				E19FA5E922E7D6D900A43BB4 /* Forge.h */,
-				E19FA5E822E7D6D900A43BB4 /* Forge Shared */,
-				E1DF8238230B729D0065F348 /* Forge iOS */,
-				E1DF823A230B72B90065F348 /* Forge tvOS */,
-				E1DF8239230B72AF0065F348 /* Forge macOS */,
+				E19FA5E822E7D6D900A43BB4 /* Shared */,
+				E1DF8238230B729D0065F348 /* iOS */,
+				E1DF823A230B72B90065F348 /* tvOS */,
+				E1DF8239230B72AF0065F348 /* macOS */,
 			);
 			path = Forge;
 			sourceTree = "<group>";
