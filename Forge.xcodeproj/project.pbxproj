@@ -11,11 +11,17 @@
 		E19FA5FE22E7D84E00A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
 		E19FA61E22E8B51000A43BB4 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
+		E1A03810230E5E6000D7F4C2 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1A03811230E5E6F00D7F4C2 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
 		E1DF8236230B72050065F348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8235230B72050065F348 /* ViewController.swift */; };
-		E1DF8237230B72050065F348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8235230B72050065F348 /* ViewController.swift */; };
 		E1DF823C230B730C0065F348 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF823B230B730C0065F348 /* ViewController.xib */; };
 		E1DF8245230C9DBB0065F348 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8244230C9DBB0065F348 /* View.swift */; };
-		E1DF8246230C9DBB0065F348 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8244230C9DBB0065F348 /* View.swift */; };
+		E1E11E39230E632000E86791 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E37230E632000E86791 /* MetalKit.framework */; };
+		E1E11E3A230E632000E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E38230E632000E86791 /* Metal.framework */; };
+		E1E11E3D230E632700E86791 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3B230E632700E86791 /* MetalKit.framework */; };
+		E1E11E3E230E632700E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3C230E632700E86791 /* Metal.framework */; };
+		E1E11E41230E632F00E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3F230E632F00E86791 /* Metal.framework */; };
+		E1E11E42230E632F00E86791 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E40230E632F00E86791 /* MetalKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +30,16 @@
 		E19FA5EA22E7D6D900A43BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E19FA61622E8B4F100A43BB4 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A03808230E5E4A00D7F4C2 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DF8235230B72050065F348 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E1DF823B230B730C0065F348 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		E1DF8244230C9DBB0065F348 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		E1E11E37230E632000E86791 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		E1E11E38230E632000E86791 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		E1E11E3B230E632700E86791 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.4.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		E1E11E3C230E632700E86791 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.4.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		E1E11E3F230E632F00E86791 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.4.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		E1E11E40230E632F00E86791 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.4.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E11E39230E632000E86791 /* MetalKit.framework in Frameworks */,
+				E1E11E3A230E632000E86791 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +56,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E11E3D230E632700E86791 /* MetalKit.framework in Frameworks */,
+				E1E11E3E230E632700E86791 /* Metal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1A03805230E5E4A00D7F4C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1E11E41230E632F00E86791 /* Metal.framework in Frameworks */,
+				E1E11E42230E632F00E86791 /* MetalKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +78,7 @@
 			children = (
 				E1DF8241230B77E50065F348 /* Forge */,
 				E19FA5E722E7D6D900A43BB4 /* Products */,
+				E1E11E36230E632000E86791 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +87,7 @@
 			children = (
 				E19FA5E622E7D6D900A43BB4 /* Forge.framework */,
 				E19FA61622E8B4F100A43BB4 /* Forge.framework */,
+				E1A03808230E5E4A00D7F4C2 /* Forge.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */,
-				E1DF8235230B72050065F348 /* ViewController.swift */,
-				E1DF8244230C9DBB0065F348 /* View.swift */,
 			);
 			path = "Forge Shared";
 			sourceTree = "<group>";
@@ -84,6 +110,8 @@
 		E1DF8239230B72AF0065F348 /* Forge macOS */ = {
 			isa = PBXGroup;
 			children = (
+				E1DF8235230B72050065F348 /* ViewController.swift */,
+				E1DF8244230C9DBB0065F348 /* View.swift */,
 				E1DF823B230B730C0065F348 /* ViewController.xib */,
 			);
 			path = "Forge macOS";
@@ -109,6 +137,19 @@
 			path = Forge;
 			sourceTree = "<group>";
 		};
+		E1E11E36230E632000E86791 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1E11E3F230E632F00E86791 /* Metal.framework */,
+				E1E11E40230E632F00E86791 /* MetalKit.framework */,
+				E1E11E3C230E632700E86791 /* Metal.framework */,
+				E1E11E3B230E632700E86791 /* MetalKit.framework */,
+				E1E11E38230E632000E86791 /* Metal.framework */,
+				E1E11E37230E632000E86791 /* MetalKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -128,12 +169,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1A03803230E5E4A00D7F4C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1A03810230E5E6000D7F4C2 /* Forge.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E19FA5E522E7D6D900A43BB4 /* Forge */ = {
+		E19FA5E522E7D6D900A43BB4 /* Forge-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E19FA5EE22E7D6D900A43BB4 /* Build configuration list for PBXNativeTarget "Forge" */;
+			buildConfigurationList = E19FA5EE22E7D6D900A43BB4 /* Build configuration list for PBXNativeTarget "Forge-macOS" */;
 			buildPhases = (
 				E19FA5E122E7D6D900A43BB4 /* Headers */,
 				E19FA5E222E7D6D900A43BB4 /* Sources */,
@@ -144,7 +193,7 @@
 			);
 			dependencies = (
 			);
-			name = Forge;
+			name = "Forge-macOS";
 			productName = Forge;
 			productReference = E19FA5E622E7D6D900A43BB4 /* Forge.framework */;
 			productType = "com.apple.product-type.framework";
@@ -167,6 +216,24 @@
 			productReference = E19FA61622E8B4F100A43BB4 /* Forge.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E1A03807230E5E4A00D7F4C2 /* Forge-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1A0380F230E5E4A00D7F4C2 /* Build configuration list for PBXNativeTarget "Forge-tvOS" */;
+			buildPhases = (
+				E1A03803230E5E4A00D7F4C2 /* Headers */,
+				E1A03804230E5E4A00D7F4C2 /* Sources */,
+				E1A03805230E5E4A00D7F4C2 /* Frameworks */,
+				E1A03806230E5E4A00D7F4C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Forge-tvOS";
+			productName = "Forge-tvOS";
+			productReference = E1A03808230E5E4A00D7F4C2 /* Forge.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,6 +248,9 @@
 						LastSwiftMigration = 1100;
 					};
 					E19FA61522E8B4F100A43BB4 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					E1A03807230E5E4A00D7F4C2 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -198,8 +268,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E19FA5E522E7D6D900A43BB4 /* Forge */,
+				E19FA5E522E7D6D900A43BB4 /* Forge-macOS */,
 				E19FA61522E8B4F100A43BB4 /* Forge-iOS */,
+				E1A03807230E5E4A00D7F4C2 /* Forge-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -214,6 +285,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E19FA61422E8B4F100A43BB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1A03806230E5E4A00D7F4C2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -237,9 +315,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1DF8246230C9DBB0065F348 /* View.swift in Sources */,
-				E1DF8237230B72050065F348 /* ViewController.swift in Sources */,
 				E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1A03804230E5E4A00D7F4C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1A03811230E5E6F00D7F4C2 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +381,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -354,6 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -385,7 +471,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.syedrezaali.Forge;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Forge;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -412,7 +498,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.syedrezaali.Forge;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Forge;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -473,6 +559,61 @@
 			};
 			name = Release;
 		};
+		E1A0380D230E5E4A00D7F4C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = CC7PU3PUHS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Forge/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.syedrezaali.Forge-tvOS";
+				PRODUCT_NAME = Forge;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Debug;
+		};
+		E1A0380E230E5E4A00D7F4C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = CC7PU3PUHS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Forge/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.syedrezaali.Forge-tvOS";
+				PRODUCT_NAME = Forge;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -485,7 +626,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E19FA5EE22E7D6D900A43BB4 /* Build configuration list for PBXNativeTarget "Forge" */ = {
+		E19FA5EE22E7D6D900A43BB4 /* Build configuration list for PBXNativeTarget "Forge-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E19FA5EF22E7D6D900A43BB4 /* Debug */,
@@ -499,6 +640,15 @@
 			buildConfigurations = (
 				E19FA61C22E8B4F100A43BB4 /* Debug */,
 				E19FA61D22E8B4F100A43BB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1A0380F230E5E4A00D7F4C2 /* Build configuration list for PBXNativeTarget "Forge-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1A0380D230E5E4A00D7F4C2 /* Debug */,
+				E1A0380E230E5E4A00D7F4C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

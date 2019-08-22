@@ -81,7 +81,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func resize(_ size: (width: Float, height: Float)) {}
     
     open func cleanup() {}
-    
+#if os(macOS)
     open func touchesBegan(with event: NSEvent) {}
     
     open func touchesEnded(with event: NSEvent) {}
@@ -111,4 +111,5 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func magnify(with event: NSEvent) {}
     
     open func rotate(with event: NSEvent) {}
+#endif
 }
