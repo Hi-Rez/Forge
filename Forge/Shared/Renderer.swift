@@ -28,6 +28,17 @@ open class Renderer: NSObject, MTKViewDelegate {
         return self.mtkView.depthStencilPixelFormat
     }
     
+    public var depthPixelFormat: MTLPixelFormat {
+        return self.mtkView.depthStencilPixelFormat
+    }
+    
+    public var stencilPixelFormat: MTLPixelFormat {
+        if depthPixelFormat == .depth32Float || depthPixelFormat == .depth16Unorm {
+            return .invalid
+        }
+        return self.mtkView.depthStencilPixelFormat
+    }
+    
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
     
     public required init?(metalKitView: MTKView) {
