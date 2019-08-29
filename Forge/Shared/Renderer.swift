@@ -33,7 +33,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     public var stencilPixelFormat: MTLPixelFormat {
-        if depthPixelFormat == .depth32Float || depthPixelFormat == .depth16Unorm {
+        if depthPixelFormat == .depth32Float {
             return .invalid
         }
         return self.mtkView.depthStencilPixelFormat
