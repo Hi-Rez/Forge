@@ -52,7 +52,6 @@ open class Renderer: NSObject, MTKViewDelegate {
         
         metalKitView.depthStencilPixelFormat = .depth32Float_stencil8
         metalKitView.colorPixelFormat = .bgra8Unorm_srgb
-        metalKitView.sampleCount = 1
         
         self.setupMtkView(self.mtkView)
         

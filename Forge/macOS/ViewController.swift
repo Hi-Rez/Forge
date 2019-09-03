@@ -14,6 +14,9 @@ open class ViewController: NSViewController {
     open var mtkView: MTKView!
     open var renderer: Renderer?
     
+    open var keyDownHandler: Any?
+    open var keyUpHandler: Any?
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
@@ -21,8 +24,29 @@ open class ViewController: NSViewController {
         self.setupEvents()
     }
     
+    open override var acceptsFirstResponder: Bool { return true }
+    open override func becomeFirstResponder() -> Bool { return true }
+    open override func resignFirstResponder() -> Bool { return true }
+    
     open func setupEvents() {
         self.mtkView.allowedTouchTypes = .indirect
+        self.keyDownHandler = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [unowned self] (aEvent) -> NSEvent? in
+            self.keyDown(with: aEvent)
+            return aEvent
+        }
+        
+        self.keyUpHandler = NSEvent.addLocalMonitorForEvents(matching: .keyUp) { [unowned self] (aEvent) -> NSEvent? in
+            self.keyUp(with: aEvent)
+            return aEvent
+        }
+    }
+    
+    open func removeEvents() {
+        guard let keyDownHandler = self.keyDownHandler else { return }
+        NSEvent.removeMonitor(keyDownHandler)
+        
+        guard let keyUpHandler = self.keyUpHandler else { return }
+        NSEvent.removeMonitor(keyUpHandler)
     }
     
     open func setupView() {
@@ -123,5 +147,9 @@ open class ViewController: NSViewController {
     open override func keyUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         renderer.keyUp(with: event)
+    }
+    
+    deinit {
+        removeEvents()
     }
 }

@@ -10,6 +10,8 @@ import MetalKit
 
 open class View: MTKView {
     open override func performKeyEquivalent(with event: NSEvent) -> Bool {
-        return true
+        let modifiers: NSEvent.ModifierFlags = [.capsLock, .control, .option, .command, .numericPad, .help, .function]
+        let result = event.modifierFlags.isDisjoint(with: modifiers)
+        return result
     }
 }
