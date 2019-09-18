@@ -13,6 +13,11 @@ import MetalKit
 open class ViewController: NSViewController {
     open var mtkView: MTKView!
     open var renderer: Renderer?
+    open var rendererClassName: String? {
+        didSet {
+            self.setupRenderer()
+        }
+    }
     
     open var keyDownHandler: Any?
     open var keyUpHandler: Any?
@@ -64,13 +69,16 @@ open class ViewController: NSViewController {
     }
     
     open func setupRenderer() {
-        let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
-        let typ: AnyClass = NSClassFromString("\(namespace).Renderer")!
-        let cls = typ as! Renderer.Type
-        if let renderer = cls.init(metalKitView: self.mtkView) {
-            renderer.mtkView(self.mtkView, drawableSizeWillChange: self.mtkView.drawableSize)
-            self.mtkView.delegate = renderer
-            self.renderer = renderer
+        if let mtkView = self.mtkView, let rendererClass = rendererClassName {
+            let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
+            if let typ: AnyClass = NSClassFromString("\(namespace)." + "\(rendererClass)") {
+                let cls = typ as! Renderer.Type
+                if let renderer = cls.init(metalKitView: mtkView) {
+                    renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                    mtkView.delegate = renderer
+                    self.renderer = renderer
+                }
+            }
         }
     }
     
