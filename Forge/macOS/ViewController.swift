@@ -12,7 +12,20 @@ import MetalKit
 // Our macOS specific view controller
 open class ViewController: NSViewController {
     open var mtkView: MTKView!
-    open var renderer: Renderer?
+    open var renderer: Renderer? {
+        willSet
+        {
+            if renderer == nil  {
+                mtkView.delegate = nil
+            }
+        }
+        didSet
+        {
+            if renderer != nil  {
+                mtkView.delegate = renderer
+            }
+        }
+    }
     open var rendererClassName: String? {
         didSet {
             self.setupRenderer()
@@ -75,7 +88,6 @@ open class ViewController: NSViewController {
                 let cls = typ as! Renderer.Type
                 if let renderer = cls.init(metalKitView: mtkView) {
                     renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-                    mtkView.delegate = renderer
                     self.renderer = renderer
                 }
             }
