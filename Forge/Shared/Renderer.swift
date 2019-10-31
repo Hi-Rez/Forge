@@ -12,10 +12,11 @@ import simd
 
 public let maxBuffersInFlight: Int = 3
 
-open class Renderer: NSObject, MTKViewDelegate {
+open class Renderer: NSObject, MTKViewDelegate { 
     public weak var mtkView: MTKView!
     public let device: MTLDevice
     public let commandQueue: MTLCommandQueue
+    
     public var sampleCount: Int {
         return self.mtkView.sampleCount
     }
@@ -33,7 +34,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     public var stencilPixelFormat: MTLPixelFormat {
-        if depthPixelFormat == .depth32Float {
+        if self.depthPixelFormat == .depth32Float {
             return .invalid
         }
         return self.mtkView.depthStencilPixelFormat
@@ -72,7 +73,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     deinit { self.cleanup() }
     
-    open func preDraw() -> MTLCommandBuffer? {
+    open func preDraw() -> MTLCommandBuffer? {        
         self.update()
         
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
@@ -89,7 +90,6 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func postDraw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {
         guard let drawable = view.currentDrawable else { return }
-        
         commandBuffer.present(drawable)
         commandBuffer.commit()
     }
@@ -103,35 +103,48 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func resize(_ size: (width: Float, height: Float)) {}
     
     open func cleanup() {}
+    
     #if os(macOS)
-        open func touchesBegan(with event: NSEvent) {}
-        
-        open func touchesEnded(with event: NSEvent) {}
-        
-        open func touchesMoved(with event: NSEvent) {}
-        
-        open func touchesCancelled(with event: NSEvent) {}
-        
-        open func scrollWheel(with event: NSEvent) {}
-        
-        open func mouseMoved(with event: NSEvent) {}
-        
-        open func mouseDown(with event: NSEvent) {}
-        
-        open func mouseDragged(with event: NSEvent) {}
-        
-        open func mouseUp(with event: NSEvent) {}
-        
-        open func mouseEntered(with event: NSEvent) {}
-        
-        open func mouseExited(with event: NSEvent) {}
-        
-        open func keyDown(with event: NSEvent) {}
-        
-        open func keyUp(with event: NSEvent) {}
-        
-        open func magnify(with event: NSEvent) {}
-        
-        open func rotate(with event: NSEvent) {}
+    
+    open func touchesBegan(with event: NSEvent) {}
+    
+    open func touchesEnded(with event: NSEvent) {}
+    
+    open func touchesMoved(with event: NSEvent) {}
+    
+    open func touchesCancelled(with event: NSEvent) {}
+    
+    open func scrollWheel(with event: NSEvent) {}
+    
+    open func mouseMoved(with event: NSEvent) {}
+    
+    open func mouseDown(with event: NSEvent) {}
+    
+    open func mouseDragged(with event: NSEvent) {}
+    
+    open func mouseUp(with event: NSEvent) {}
+    
+    open func mouseEntered(with event: NSEvent) {}
+    
+    open func mouseExited(with event: NSEvent) {}
+    
+    open func keyDown(with event: NSEvent) {}
+    
+    open func keyUp(with event: NSEvent) {}
+    
+    open func magnify(with event: NSEvent) {}
+    
+    open func rotate(with event: NSEvent) {}
+    
+    #elseif os(iOS)
+    
+    open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    
+    open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    
+    open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    
+    open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    
     #endif
 }

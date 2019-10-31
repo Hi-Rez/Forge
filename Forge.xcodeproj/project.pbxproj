@@ -13,6 +13,8 @@
 		E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
 		E1A03810230E5E6000D7F4C2 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1A03811230E5E6F00D7F4C2 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
+		E1A84D542357B9A200A02B6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A84D522357B9A200A02B6B /* ViewController.swift */; };
+		E1A84D552357B9A200A02B6B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1A84D532357B9A200A02B6B /* ViewController.xib */; };
 		E1DF8236230B72050065F348 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8235230B72050065F348 /* ViewController.swift */; };
 		E1DF823C230B730C0065F348 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DF823B230B730C0065F348 /* ViewController.xib */; };
 		E1DF8245230C9DBB0065F348 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF8244230C9DBB0065F348 /* View.swift */; };
@@ -31,6 +33,8 @@
 		E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		E19FA61622E8B4F100A43BB4 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A03808230E5E4A00D7F4C2 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A84D522357B9A200A02B6B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E1A84D532357B9A200A02B6B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		E1DF8235230B72050065F348 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E1DF823B230B730C0065F348 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		E1DF8244230C9DBB0065F348 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 		E1DF8238230B729D0065F348 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E1A84D522357B9A200A02B6B /* ViewController.swift */,
+				E1A84D532357B9A200A02B6B /* ViewController.xib */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A84D552357B9A200A02B6B /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A84D542357B9A200A02B6B /* ViewController.swift in Sources */,
 				E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -482,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -507,6 +517,7 @@
 		E19FA61C22E8B4F100A43BB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CC7PU3PUHS;
@@ -534,6 +545,7 @@
 		E19FA61D22E8B4F100A43BB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CC7PU3PUHS;

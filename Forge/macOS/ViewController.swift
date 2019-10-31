@@ -13,19 +13,18 @@ import MetalKit
 open class ViewController: NSViewController {
     open var mtkView: MTKView!
     open var renderer: Renderer? {
-        willSet
-        {
-            if renderer == nil  {
+        willSet {
+            if renderer == nil {
                 mtkView.delegate = nil
             }
         }
-        didSet
-        {
-            if renderer != nil  {
+        didSet {
+            if renderer != nil {
                 mtkView.delegate = renderer
             }
         }
     }
+    
     open var rendererClassName: String? {
         didSet {
             self.setupRenderer()
@@ -96,77 +95,107 @@ open class ViewController: NSViewController {
     
     open override func touchesBegan(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.touchesBegan(with: event)
+        if event.window == self.mtkView.window {
+            renderer.touchesBegan(with: event)
+        }
     }
     
     open override func touchesEnded(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.touchesEnded(with: event)
+        if event.window == self.mtkView.window {
+            renderer.touchesEnded(with: event)
+        }
     }
     
     open override func touchesMoved(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.touchesMoved(with: event)
+        if event.window == self.mtkView.window {
+            renderer.touchesMoved(with: event)
+        }
     }
     
     open override func touchesCancelled(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.touchesCancelled(with: event)
+        if event.window == self.mtkView.window {
+            renderer.touchesCancelled(with: event)
+        }
     }
     
     open override func mouseMoved(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseMoved(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseMoved(with: event)
+        }
     }
     
     open override func mouseDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseDown(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseDown(with: event)
+        }
     }
     
     open override func mouseDragged(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseDragged(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseDragged(with: event)
+        }
     }
     
     open override func mouseUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseUp(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseUp(with: event)
+        }
     }
     
     open override func mouseEntered(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseEntered(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseEntered(with: event)
+        }
     }
     
     open override func mouseExited(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.mouseExited(with: event)
+        if event.window == self.mtkView.window {
+            renderer.mouseExited(with: event)
+        }
     }
     
     open override func magnify(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.magnify(with: event)
+        if event.window == self.mtkView.window {
+            renderer.magnify(with: event)
+        }
     }
     
     open override func rotate(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.rotate(with: event)
+        if event.window == self.mtkView.window {
+            renderer.rotate(with: event)
+        }
     }
     
     open override func scrollWheel(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.scrollWheel(with: event)
+        if event.window == self.mtkView.window {
+            renderer.scrollWheel(with: event)
+        }
     }
     
     open override func keyDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.keyDown(with: event)
+        if event.window == self.mtkView.window {
+            renderer.keyDown(with: event)
+        }
     }
     
     open override func keyUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
-        renderer.keyUp(with: event)
+        if event.window == self.mtkView.window {
+            renderer.keyUp(with: event)
+        }
     }
     
     deinit {
