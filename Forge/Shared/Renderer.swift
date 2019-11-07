@@ -12,7 +12,7 @@ import simd
 
 public let maxBuffersInFlight: Int = 3
 
-open class Renderer: NSObject, MTKViewDelegate { 
+open class Renderer: NSObject, MTKViewDelegate {
     public weak var mtkView: MTKView!
     public let device: MTLDevice
     public let commandQueue: MTLCommandQueue
@@ -73,17 +73,18 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     deinit { self.cleanup() }
     
-    open func preDraw() -> MTLCommandBuffer? {        
-        self.update()
-        
+    open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
         
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
-        
-        let semaphore = self.inFlightSemaphore
-        commandBuffer.addCompletedHandler { (_) -> Swift.Void in
-            semaphore.signal()
+                
+        commandBuffer.addCompletedHandler { [weak self] _ in
+            if let strongSelf = self {
+                strongSelf.inFlightSemaphore.signal()
+            }
         }
+        
+        self.update()
         
         return commandBuffer
     }
