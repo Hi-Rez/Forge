@@ -1,12 +1,12 @@
 //
 //  ViewController.swift
-//  Forge-iOS
+//  Forge-tvOS
 //
-//  Created by Reza Ali on 10/15/19.
+//  Created by Reza Ali on 11/7/19.
 //
 
 import MetalKit
-import UIKit
+import Foundation
 
 open class ViewController: UIViewController {
     open var mtkView: MTKView!
@@ -43,9 +43,7 @@ open class ViewController: UIViewController {
     
     open func removeEvents() {}
     
-    open func setupView() {
-        view.isMultipleTouchEnabled = true
-        
+    open func setupView() {        
         guard let mtkView = self.view as? MTKView else {
             print("View attached to ViewController is not an MTKView")
             return
@@ -95,24 +93,5 @@ open class ViewController: UIViewController {
     deinit {
         removeEvents()
     }
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let renderer = self.renderer else { return }
-        renderer.touchesBegan(touches, with: event)
-    }
-    
-    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let renderer = self.renderer else { return }
-        renderer.touchesMoved(touches, with: event)
-    }
-    
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let renderer = self.renderer else { return }
-        renderer.touchesEnded(touches, with: event)
-    }
-    
-    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let renderer = self.renderer else { return }
-        renderer.touchesCancelled(touches, with: event)
-    }
 }
+

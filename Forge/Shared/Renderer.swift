@@ -71,8 +71,6 @@ open class Renderer: NSObject, MTKViewDelegate {
         self.resize((width: Float(size.width), height: Float(size.height)))
     }
     
-    deinit { self.cleanup() }
-    
     open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
         
@@ -102,8 +100,6 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func draw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {}
     
     open func resize(_ size: (width: Float, height: Float)) {}
-    
-    open func cleanup() {}
     
     #if os(macOS)
     
