@@ -45,6 +45,7 @@ open class ViewController: UIViewController {
     
     open func setupView() {
         view.isMultipleTouchEnabled = true
+        view.window.acceptsMouseMovedEvents = true
         
         guard let mtkView = self.view as? MTKView else {
             print("View attached to ViewController is not an MTKView")

@@ -12,6 +12,7 @@ import MetalKit
 // Our macOS specific view controller
 open class ViewController: NSViewController {
     open var mtkView: MTKView!
+    var trackingArea: NSTrackingArea?
     open var renderer: Renderer? {
         willSet {
             if renderer == nil {
@@ -39,6 +40,21 @@ open class ViewController: NSViewController {
         self.setupView()
         self.setupRenderer()
         self.setupEvents()
+        self.setupTracking()
+    }
+            
+    func setupTracking() {
+        let area = NSTrackingArea(rect: mtkView.bounds, options: [.activeAlways, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
+        mtkView.addTrackingArea(area)
+        self.trackingArea = area
+    }
+    
+    func removeTracking() {
+        if let trackingArea = trackingArea {
+            mtkView.removeTrackingArea(trackingArea)
+            self.trackingArea = nil
+            NSCursor.setHiddenUntilMouseMoves(false)
+        }
     }
     
     open override var acceptsFirstResponder: Bool { return true }
@@ -199,6 +215,7 @@ open class ViewController: NSViewController {
     }
     
     deinit {
+        removeTracking()
         removeEvents()
     }
 }
