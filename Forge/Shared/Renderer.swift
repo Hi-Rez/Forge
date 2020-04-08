@@ -137,7 +137,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func rotate(with event: NSEvent) {}
     
-    #elseif os(iOS)
+    #elseif os(iOS) || os(tvOS)
     
     open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {}
     

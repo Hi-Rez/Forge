@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
 
   spec.osx.resources          = "Forge/macOS/*.xib"
   spec.ios.resources          = "Forge/iOS/*.xib"
-  spec.tvos.resources          = "Forge/tvOS/*.xib"
+  spec.tvos.resources         = "Forge/tvOS/*.xib"
 
   spec.frameworks             = "Metal", "MetalKit"
   spec.module_name            = "Forge"
