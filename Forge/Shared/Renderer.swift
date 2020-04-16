@@ -60,7 +60,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     deinit {
-        while (inFlightSemaphore.signal() != 0) {}
+        inFlightSemaphore.signal()
     }
     
     open func setupMtkView(_ metalKitView: MTKView) {}
