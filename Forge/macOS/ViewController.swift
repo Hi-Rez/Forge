@@ -22,13 +22,8 @@ open class ViewController: NSViewController {
         didSet {
             if renderer != nil {
                 mtkView.delegate = renderer
+                setupRenderer()
             }
-        }
-    }
-    
-    open var rendererClassName: String? {
-        didSet {
-            self.setupRenderer()
         }
     }
     
@@ -42,16 +37,16 @@ open class ViewController: NSViewController {
         self.setupEvents()
         self.setupTracking()
     }
-            
+    
     func setupTracking() {
         let area = NSTrackingArea(rect: mtkView.bounds, options: [.activeAlways, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
-        mtkView.addTrackingArea(area)
+        self.mtkView.addTrackingArea(area)
         self.trackingArea = area
     }
     
     func removeTracking() {
         if let trackingArea = trackingArea {
-            mtkView.removeTrackingArea(trackingArea)
+            self.mtkView.removeTrackingArea(trackingArea)
             self.trackingArea = nil
             NSCursor.setHiddenUntilMouseMoves(false)
         }
@@ -97,15 +92,8 @@ open class ViewController: NSViewController {
     }
     
     open func setupRenderer() {
-        if let mtkView = self.mtkView, let rendererClass = rendererClassName {
-            let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
-            if let typ: AnyClass = NSClassFromString("\(namespace)." + "\(rendererClass)") {
-                let cls = typ as! Renderer.Type
-                if let renderer = cls.init(metalKitView: mtkView) {
-                    renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-                    self.renderer = renderer
-                }
-            }
+        if let renderer = self.renderer {
+            renderer.mtkView(self.mtkView, drawableSizeWillChange: self.mtkView.drawableSize)
         }
     }
     
