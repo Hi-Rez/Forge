@@ -22,7 +22,7 @@ open class ViewController: NSViewController {
         didSet {
             if renderer != nil {
                 mtkView.delegate = renderer
-                setupRenderer()
+//                setupRenderer()
             }
         }
     }
@@ -33,7 +33,6 @@ open class ViewController: NSViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        self.setupRenderer()
         self.setupEvents()
         self.setupTracking()
     }
