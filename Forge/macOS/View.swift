@@ -66,4 +66,8 @@ open class View: MTKView {
     open override func concludeDragOperation(_ sender: NSDraggingInfo?) {
         dragDelegate?.concludeDragOperation?(sender)
     }
+    
+    open override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+        return true
+    }
 }
