@@ -41,6 +41,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
+    var inFlightSemaphoreCount = 0
     
     public required init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
@@ -60,7 +61,11 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     deinit {
-        while (inFlightSemaphore.signal() != 0) {}        
+        print("forge dealloc: \(inFlightSemaphoreCount)")
+        while (inFlightSemaphoreCount > 0) {
+            print(inFlightSemaphore.signal())
+            inFlightSemaphoreCount -= 1
+        }
     }
     
     open func setupMtkView(_ metalKitView: MTKView) {}
@@ -77,12 +82,14 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
+        inFlightSemaphoreCount += 1
         
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
                 
         commandBuffer.addCompletedHandler { [weak self] _ in
             if let strongSelf = self {
                 strongSelf.inFlightSemaphore.signal()
+                strongSelf.inFlightSemaphoreCount -= 1
             }
         }
         
