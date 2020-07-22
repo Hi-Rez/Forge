@@ -62,9 +62,9 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     deinit {
         print("forge dealloc: \(inFlightSemaphoreCount)")
-        while (inFlightSemaphoreCount > 0) {
-            print(inFlightSemaphore.signal())
-            inFlightSemaphoreCount -= 1
+        while (abs(inFlightSemaphoreCount) > 0) {
+            inFlightSemaphoreCount = inFlightSemaphore.signal()
+            print(inFlightSemaphoreCount)
         }
     }
     
