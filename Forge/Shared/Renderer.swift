@@ -41,7 +41,8 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
-    var inFlightSemaphoreCount = 0
+    var inFlightSemaphoreWait = 0
+    var inFlightSemaphoreRelease = 0
     
     public required init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
@@ -53,7 +54,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         super.init()
         
         metalKitView.depthStencilPixelFormat = .depth32Float_stencil8
-        metalKitView.colorPixelFormat = .bgra8Unorm_srgb
+        metalKitView.colorPixelFormat = .bgra8Unorm
         
         self.setupMtkView(self.mtkView)
         
@@ -61,10 +62,12 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     deinit {
-        print("forge dealloc: \(inFlightSemaphoreCount)")
-        while (abs(inFlightSemaphoreCount) > 0) {
-            inFlightSemaphoreCount = inFlightSemaphore.signal()
-            print(inFlightSemaphoreCount)
+//        print("forge dealloc wait: \(inFlightSemaphoreWait)")
+//        print("forge dealloc release: \(inFlightSemaphoreRelease)")
+//        print("forge dealloc count: \(inFlightSemaphoreCount)")
+        let delta = inFlightSemaphoreWait + inFlightSemaphoreRelease
+        for _ in 0..<delta {
+            inFlightSemaphore.signal()
         }
     }
     
@@ -82,14 +85,14 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
-        inFlightSemaphoreCount += 1
+        inFlightSemaphoreWait += 1
         
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
-                
+
         commandBuffer.addCompletedHandler { [weak self] _ in
             if let strongSelf = self {
                 strongSelf.inFlightSemaphore.signal()
-                strongSelf.inFlightSemaphoreCount -= 1
+                strongSelf.inFlightSemaphoreRelease -= 1
             }
         }
         
