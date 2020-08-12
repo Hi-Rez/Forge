@@ -11,6 +11,7 @@ import MetalKit
 
 // Our macOS specific view controller
 open class ViewController: NSViewController {
+    open var lowPower: Bool = false
     open var mtkView: MTKView!
     var trackingArea: NSTrackingArea?
     open var renderer: Renderer? {
@@ -81,12 +82,24 @@ open class ViewController: NSViewController {
             print("View attached to ViewController is not an MTKView")
             return
         }
+        
         guard let defaultDevice = MTLCreateSystemDefaultDevice() else {
             print("Metal is not supported on this device")
             return
         }
         
-        mtkView.device = defaultDevice
+        var forgeDevice = defaultDevice
+        if !lowPower {
+            let devices = MTLCopyAllDevices()
+            for device in devices {
+                if !device.isLowPower {
+                    forgeDevice = device
+                    break
+                }
+            }
+        }
+        
+        mtkView.device = forgeDevice
         self.mtkView = mtkView
     }
     
