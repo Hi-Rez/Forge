@@ -9,23 +9,27 @@ import MetalKit
 import UIKit
 
 open class ViewController: UIViewController {
-    open var mtkView: MTKView!
-    open var renderer: Renderer? {
-        willSet {
-            if renderer != nil {
-                mtkView.delegate = nil
-            }
-        }
+    open var lowPower: Bool = false
+    open var mtkView: MTKView? {
         didSet {
-            if renderer != nil {
+            if let mtkView = self.mtkView, let renderer = self.renderer {
+                renderer.mtkView = mtkView
                 mtkView.delegate = renderer
             }
         }
     }
     
-    open var rendererClassName: String? {
+    open var renderer: Renderer? {
+        willSet {
+            if let mtkView = self.mtkView, let _ = self.renderer {
+                mtkView.delegate = nil
+            }
+        }
         didSet {
-            self.setupRenderer()
+            if let mtkView = self.mtkView, let renderer = self.renderer {
+                renderer.mtkView = mtkView
+                mtkView.delegate = renderer
+            }
         }
     }
     
@@ -44,8 +48,10 @@ open class ViewController: UIViewController {
     open func removeEvents() {}
     
     open func setupView() {
-        view.isMultipleTouchEnabled = true
-
+        #if os(iOS)
+            view.isMultipleTouchEnabled = true
+        #endif
+        
         guard let mtkView = self.view as? MTKView else {
             print("View attached to ViewController is not an MTKView")
             return
@@ -60,34 +66,25 @@ open class ViewController: UIViewController {
     }
     
     open func setupRenderer() {
-        if let mtkView = self.mtkView, let rendererClass = rendererClassName {
-            let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
-            if let typ: AnyClass = NSClassFromString("\(namespace)." + "\(rendererClass)") {
-                let cls = typ as! Renderer.Type
-                if let renderer = cls.init(metalKitView: mtkView) {
-                    renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-                    self.renderer = renderer
-                }
-            }
-        }
+        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
     }
     
     open func resize() {
-        if let renderer = self.renderer {
-            let frame = view.frame
-            let scale = UIScreen.main.scale
-            let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
-            renderer.mtkView.drawableSize = pixels
-            renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-        }
+        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        let frame = view.frame
+        let scale = UIScreen.main.scale
+        let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
+        renderer.mtkView.drawableSize = pixels
+        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
     }
     
-    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.resize()
     }
     
-    override open func viewWillLayoutSubviews() {
+    open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.resize()
     }

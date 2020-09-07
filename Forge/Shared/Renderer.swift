@@ -13,9 +13,26 @@ import simd
 public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
-    public weak var mtkView: MTKView!
-    public let device: MTLDevice
-    public let commandQueue: MTLCommandQueue
+    public weak var mtkView: MTKView! {
+        didSet {
+            if mtkView != nil {
+                self.device = mtkView.device!
+                
+                guard let queue = self.device.makeCommandQueue() else { return }
+                self.commandQueue = queue
+                
+                mtkView.depthStencilPixelFormat = .depth32Float_stencil8
+                mtkView.colorPixelFormat = .bgra8Unorm
+                
+                self.setupMtkView(self.mtkView)
+                
+                self.setup()
+            }
+        }
+    }
+    
+    public var device: MTLDevice!
+    public var commandQueue: MTLCommandQueue!
     
     public var sampleCount: Int {
         return self.mtkView.sampleCount
@@ -44,7 +61,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     var inFlightSemaphoreWait = 0
     var inFlightSemaphoreRelease = 0
     
-    public required init?(metalKitView: MTKView) {
+    public init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
         self.mtkView = metalKitView
         
@@ -59,6 +76,11 @@ open class Renderer: NSObject, MTKViewDelegate {
         self.setupMtkView(self.mtkView)
         
         self.setup()
+    }
+        
+    public override init()
+    {
+        super.init()
     }
     
     deinit {

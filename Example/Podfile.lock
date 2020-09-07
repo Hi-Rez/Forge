@@ -1,5 +1,5 @@
 PODS:
-  - Forge (0.0.2)
+  - Forge (0.1.0)
 
 DEPENDENCIES:
   - Forge (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Forge: 39104c449b06169571e688efa8791fd59d8d174b
+  Forge: 235ac8e6a6ac48d2db3be3bae3723ec6180b0ba1
 
 PODFILE CHECKSUM: 33fd635e6622ba22fcabb34713640bc7c4fa0792
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.3

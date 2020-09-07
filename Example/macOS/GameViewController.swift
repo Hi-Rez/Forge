@@ -8,11 +8,12 @@
 
 import Cocoa
 import MetalKit
+import Forge
 
 // Our macOS specific view controller
 class GameViewController: NSViewController {
 
-    var renderer: Renderer!
+    var renderer: Forge.Renderer!
     var mtkView: MTKView!
 
     override func viewDidLoad() {
@@ -31,15 +32,9 @@ class GameViewController: NSViewController {
 
         mtkView.device = defaultDevice
 
-        guard let newRenderer = Renderer(metalKitView: mtkView) else {
-            print("Renderer cannot be initialized")
-            return
-        }
-
-        renderer = newRenderer
-
+        renderer = Renderer()
+        renderer.mtkView = mtkView
         renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-
         mtkView.delegate = renderer
     }
 }

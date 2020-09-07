@@ -35,10 +35,6 @@ class Renderer: Forge.Renderer {
     var rotation: Float = 0
     var mesh: MTKMesh!
     
-    required init?(metalKitView: MTKView) {
-        super.init(metalKitView: metalKitView)
-    }
-    
     override func setupMtkView(_ metalKitView: MTKView)
     {
         metalKitView.depthStencilPixelFormat = .depth32Float_stencil8

@@ -18,7 +18,7 @@ import MetalKit
     @objc optional func concludeDragOperation(_ sender: NSDraggingInfo?)
 }
 
-open class View: MTKView {
+class View: MTKView {
     open weak var dragDelegate: DragDelegate?
     
     open override func performKeyEquivalent(with event: NSEvent) -> Bool {
