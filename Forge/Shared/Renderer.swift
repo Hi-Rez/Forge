@@ -60,23 +60,6 @@ open class Renderer: NSObject, MTKViewDelegate {
     let inFlightSemaphore = DispatchSemaphore(value: maxBuffersInFlight)
     var inFlightSemaphoreWait = 0
     var inFlightSemaphoreRelease = 0
-    
-    public init?(metalKitView: MTKView) {
-        self.device = metalKitView.device!
-        self.mtkView = metalKitView
-        
-        guard let queue = self.device.makeCommandQueue() else { return nil }
-        self.commandQueue = queue
-        
-        super.init()
-        
-        metalKitView.depthStencilPixelFormat = .depth32Float_stencil8
-        metalKitView.colorPixelFormat = .bgra8Unorm
-        
-        self.setupMtkView(self.mtkView)
-        
-        self.setup()
-    }
         
     public override init()
     {
