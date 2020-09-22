@@ -13,6 +13,11 @@ import simd
 public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
+    public enum Appearence {
+        case dark
+        case light
+    }
+    
     public weak var mtkView: MTKView! {
         didSet {
             if mtkView != nil {
@@ -28,6 +33,12 @@ open class Renderer: NSObject, MTKViewDelegate {
                 
                 self.setup()
             }
+        }
+    }
+        
+    public var appearence: Appearence = .dark {
+        didSet {
+            updateAppearance()
         }
     }
     
@@ -119,6 +130,8 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func draw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {}
     
     open func resize(_ size: (width: Float, height: Float)) {}
+    
+    open func updateAppearance() {}
     
     #if os(macOS)
     

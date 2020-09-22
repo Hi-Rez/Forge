@@ -28,6 +28,15 @@ open class ViewController: UIViewController {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
+                if self.traitCollection.userInterfaceStyle == .dark {
+                    renderer.appearence = .dark
+                }
+                else if self.traitCollection.userInterfaceStyle == .light {
+                    renderer.appearence = .light
+                }
+                else if self.traitCollection.userInterfaceStyle == .unspecified {
+                    renderer.appearence = .light
+                }
                 mtkView.delegate = renderer
             }
         }
@@ -67,6 +76,15 @@ open class ViewController: UIViewController {
     
     open func setupRenderer() {
         guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        if self.traitCollection.userInterfaceStyle == .dark {
+            renderer.appearence = .dark
+        }
+        else if self.traitCollection.userInterfaceStyle == .light {
+            renderer.appearence = .light
+        }
+        else if self.traitCollection.userInterfaceStyle == .unspecified {
+            renderer.appearence = .light
+        }
         renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
     }
     
@@ -87,6 +105,25 @@ open class ViewController: UIViewController {
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.resize()
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard let renderer = self.renderer else { return }
+        
+        if #available(iOS 13.0, *) {            
+            if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                if traitCollection.userInterfaceStyle == .dark {
+                    renderer.appearence = .dark
+                }
+                else {
+                    renderer.appearence = .light
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     deinit {

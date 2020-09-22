@@ -75,6 +75,26 @@ open class ViewController: NSViewController {
             self.keyUp(with: aEvent)
             return aEvent
         }
+        
+        DistributedNotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateAppearance),
+            name: Notification.Name("AppleInterfaceThemeChangedNotification"),
+            object: nil
+        )
+        
+        updateAppearance()
+    }
+    
+    @objc func updateAppearance() {
+        guard let renderer = self.renderer else { return }
+        
+        if let _ = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") {
+            renderer.appearence = .dark
+        }
+        else {
+            renderer.appearence = .light
+        }
     }
     
     open func removeEvents() {
@@ -83,6 +103,10 @@ open class ViewController: NSViewController {
         
         guard let keyUpHandler = self.keyUpHandler else { return }
         NSEvent.removeMonitor(keyUpHandler)
+        
+        DistributedNotificationCenter.default.removeObserver(self,
+                                                             name: Notification.Name("AppleInterfaceThemeChangedNotification"),
+                                                             object: nil)
     }
     
     open func setupView() {
