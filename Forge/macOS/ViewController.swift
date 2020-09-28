@@ -196,6 +196,48 @@ open class ViewController: NSViewController {
         }
     }
     
+    open override func rightMouseDown(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.rightMouseDown(with: event)
+        }
+    }
+    
+    open override func rightMouseDragged(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.rightMouseDragged(with: event)
+        }
+    }
+    
+    open override func rightMouseUp(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.rightMouseUp(with: event)
+        }
+    }
+    
+    open override func otherMouseDown(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.otherMouseDown(with: event)
+        }
+    }
+    
+    open override func otherMouseDragged(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.otherMouseDragged(with: event)
+        }
+    }
+    
+    open override func otherMouseUp(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.otherMouseUp(with: event)
+        }
+    }
+    
     open override func mouseEntered(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {

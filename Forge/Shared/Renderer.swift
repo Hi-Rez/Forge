@@ -157,6 +157,18 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func mouseExited(with event: NSEvent) {}
     
+    open func rightMouseDown(with event: NSEvent) {}
+    
+    open func rightMouseDragged(with event: NSEvent) {}
+    
+    open func rightMouseUp(with event: NSEvent) {}
+    
+    open func otherMouseDown(with event: NSEvent) {}
+    
+    open func otherMouseDragged(with event: NSEvent) {}
+    
+    open func otherMouseUp(with event: NSEvent) {}
+        
     open func keyDown(with event: NSEvent) {}
     
     open func keyUp(with event: NSEvent) {}
