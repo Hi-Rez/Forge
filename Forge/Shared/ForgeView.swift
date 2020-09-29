@@ -10,7 +10,7 @@ import SwiftUI
 #if os(macOS)
 public struct ForgeView: NSViewControllerRepresentable {
     public var renderer: Forge.Renderer
-    public typealias NSViewControllerType = Forge.ViewControllerpublic
+    public typealias NSViewControllerType = Forge.ViewController
     
     public init(renderer: Forge.Renderer) {
         self.renderer = renderer
