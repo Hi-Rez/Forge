@@ -10,6 +10,8 @@ import UIKit
 
 open class ViewController: UIViewController {
     open var lowPower: Bool = false
+    open var autoRotate: Bool = true
+    
     open var mtkView: MTKView? {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
@@ -112,7 +114,7 @@ open class ViewController: UIViewController {
         
         guard let renderer = self.renderer else { return }
         
-        if #available(iOS 13.0, *) {            
+        if #available(iOS 13.0, *) {
             if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
                 if traitCollection.userInterfaceStyle == .dark {
                     renderer.appearence = .dark
@@ -121,10 +123,13 @@ open class ViewController: UIViewController {
                     renderer.appearence = .light
                 }
             }
-        } else {
+        }
+        else {
             // Fallback on earlier versions
         }
     }
+    
+    open override var shouldAutorotate: Bool { return self.autoRotate }
     
     deinit {
         removeEvents()
