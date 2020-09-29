@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E124FAFF243E745F00380783 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E124FAFD243E745F00380783 /* ViewController.xib */; };
-		E124FB00243E745F00380783 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E124FAFE243E745F00380783 /* ViewController.swift */; };
 		E19FA5EB22E7D6D900A43BB4 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E19FA5FE22E7D84E00A43BB4 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */; };
 		E19FA61E22E8B51000A43BB4 /* Forge.h in Headers */ = {isa = PBXBuildFile; fileRef = E19FA5E922E7D6D900A43BB4 /* Forge.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,11 +25,11 @@
 		E1E11E3E230E632700E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3C230E632700E86791 /* Metal.framework */; };
 		E1E11E41230E632F00E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3F230E632F00E86791 /* Metal.framework */; };
 		E1E11E42230E632F00E86791 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E40230E632F00E86791 /* MetalKit.framework */; };
+		E1E367432523F07F005C77CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A84D522357B9A200A02B6B /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E124FAFD243E745F00380783 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		E124FAFE243E745F00380783 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E19FA5E622E7D6D900A43BB4 /* Forge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Forge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19FA5E922E7D6D900A43BB4 /* Forge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Forge.h; sourceTree = "<group>"; };
 		E19FA5EA22E7D6D900A43BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 		E1DF823A230B72B90065F348 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				E124FAFE243E745F00380783 /* ViewController.swift */,
 				E124FAFD243E745F00380783 /* ViewController.xib */,
 			);
 			path = tvOS;
@@ -338,7 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E124FB00243E745F00380783 /* ViewController.swift in Sources */,
+				E1E367432523F07F005C77CD /* ViewController.swift in Sources */,
 				E1A03811230E5E6F00D7F4C2 /* Renderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

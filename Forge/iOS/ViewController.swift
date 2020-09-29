@@ -129,7 +129,9 @@ open class ViewController: UIViewController {
         }
     }
     
+    #if os(iOS)
     open override var shouldAutorotate: Bool { return self.autoRotate }
+    #endif
     
     deinit {
         removeEvents()
