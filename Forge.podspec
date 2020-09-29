@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 
   spec.osx.source_files       = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/macOS/**/*.{h,m,swift}"
   spec.ios.source_files       = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/iOS/**/*.{h,m,swift}"
-  spec.tvos.source_files      = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/tvOS/**/*.{h,m,swift}"
+  spec.tvos.source_files      = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/tvOS/**/*.{h,m,swift}", "Forge/iOS/ViewController.swift"
 
   spec.osx.resources          = "Forge/macOS/*.xib"
   spec.ios.resources          = "Forge/iOS/*.xib"

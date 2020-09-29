@@ -26,6 +26,9 @@
 		E1E11E41230E632F00E86791 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E3F230E632F00E86791 /* Metal.framework */; };
 		E1E11E42230E632F00E86791 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E11E40230E632F00E86791 /* MetalKit.framework */; };
 		E1E367432523F07F005C77CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A84D522357B9A200A02B6B /* ViewController.swift */; };
+		E1E367482523F158005C77CD /* ForgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E367472523F158005C77CD /* ForgeView.swift */; };
+		E1E367492523F158005C77CD /* ForgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E367472523F158005C77CD /* ForgeView.swift */; };
+		E1E3674A2523F158005C77CD /* ForgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E367472523F158005C77CD /* ForgeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,7 @@
 		E1E11E3C230E632700E86791 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.4.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		E1E11E3F230E632F00E86791 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.4.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		E1E11E40230E632F00E86791 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.4.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		E1E367472523F158005C77CD /* ForgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 		E19FA5E822E7D6D900A43BB4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E1E367472523F158005C77CD /* ForgeView.swift */,
 				E19FA5FD22E7D84E00A43BB4 /* Renderer.swift */,
 			);
 			path = Shared;
@@ -317,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E367482523F158005C77CD /* ForgeView.swift in Sources */,
 				E1DF8245230C9DBB0065F348 /* View.swift in Sources */,
 				E1DF8236230B72050065F348 /* ViewController.swift in Sources */,
 				E19FA5FE22E7D84E00A43BB4 /* Renderer.swift in Sources */,
@@ -329,6 +335,7 @@
 			files = (
 				E1A84D542357B9A200A02B6B /* ViewController.swift in Sources */,
 				E19FA61F22E8B52700A43BB4 /* Renderer.swift in Sources */,
+				E1E367492523F158005C77CD /* ForgeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +345,7 @@
 			files = (
 				E1E367432523F07F005C77CD /* ViewController.swift in Sources */,
 				E1A03811230E5E6F00D7F4C2 /* Renderer.swift in Sources */,
+				E1E3674A2523F158005C77CD /* ForgeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
