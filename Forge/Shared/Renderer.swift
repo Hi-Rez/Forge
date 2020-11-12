@@ -13,7 +13,7 @@ import simd
 public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
-    public enum Appearence {
+    public enum Appearance {
         case dark
         case light
     }
@@ -36,7 +36,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         }
     }
         
-    public var appearence: Appearence = .dark {
+    public var appearance: Appearance = .dark {
         didSet {
             updateAppearance()
         }

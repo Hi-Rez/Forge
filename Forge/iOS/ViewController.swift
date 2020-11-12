@@ -31,13 +31,13 @@ open class ViewController: UIViewController {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 if self.traitCollection.userInterfaceStyle == .dark {
-                    renderer.appearence = .dark
+                    renderer.appearance = .dark
                 }
                 else if self.traitCollection.userInterfaceStyle == .light {
-                    renderer.appearence = .light
+                    renderer.appearance = .light
                 }
                 else if self.traitCollection.userInterfaceStyle == .unspecified {
-                    renderer.appearence = .light
+                    renderer.appearance = .light
                 }
                 mtkView.delegate = renderer
             }
@@ -79,13 +79,13 @@ open class ViewController: UIViewController {
     open func setupRenderer() {
         guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
         if self.traitCollection.userInterfaceStyle == .dark {
-            renderer.appearence = .dark
+            renderer.appearance = .dark
         }
         else if self.traitCollection.userInterfaceStyle == .light {
-            renderer.appearence = .light
+            renderer.appearance = .light
         }
         else if self.traitCollection.userInterfaceStyle == .unspecified {
-            renderer.appearence = .light
+            renderer.appearance = .light
         }
         renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
     }
@@ -117,10 +117,10 @@ open class ViewController: UIViewController {
         if #available(iOS 13.0, *) {
             if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
                 if traitCollection.userInterfaceStyle == .dark {
-                    renderer.appearence = .dark
+                    renderer.appearance = .dark
                 }
                 else {
-                    renderer.appearence = .light
+                    renderer.appearance = .light
                 }
             }
         }

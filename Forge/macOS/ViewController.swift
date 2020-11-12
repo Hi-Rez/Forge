@@ -90,10 +90,10 @@ open class ViewController: NSViewController {
         guard let renderer = self.renderer else { return }
         
         if let _ = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") {
-            renderer.appearence = .dark
+            renderer.appearance = .dark
         }
         else {
-            renderer.appearence = .light
+            renderer.appearance = .light
         }
     }
     
