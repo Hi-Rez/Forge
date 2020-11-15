@@ -38,6 +38,7 @@ open class ViewController: NSViewController {
     open var trackingArea: NSTrackingArea?
     open var keyDownHandler: Any?
     open var keyUpHandler: Any?
+    open var flagsChangedHandler: Any?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,11 @@ open class ViewController: NSViewController {
             return aEvent
         }
         
+        self.flagsChangedHandler = NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { [unowned self] (aEvent) -> NSEvent? in
+            self.flagsChanged(with: aEvent)
+            return aEvent
+        }
+        
         DistributedNotificationCenter.default.addObserver(
             self,
             selector: #selector(updateAppearance),
@@ -103,6 +109,9 @@ open class ViewController: NSViewController {
         
         guard let keyUpHandler = self.keyUpHandler else { return }
         NSEvent.removeMonitor(keyUpHandler)
+        
+        guard let flagsChangedHandler = self.flagsChangedHandler else { return }
+        NSEvent.removeMonitor(flagsChangedHandler)
         
         DistributedNotificationCenter.default.removeObserver(self,
                                                              name: Notification.Name("AppleInterfaceThemeChangedNotification"),
@@ -284,6 +293,13 @@ open class ViewController: NSViewController {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.keyUp(with: event)
+        }
+    }
+    
+    open override func flagsChanged(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.flagsChanged(with: event)
         }
     }
     

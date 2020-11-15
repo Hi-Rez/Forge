@@ -173,6 +173,8 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func keyUp(with event: NSEvent) {}
     
+    open func flagsChanged(with event: NSEvent) {}
+    
     open func magnify(with event: NSEvent) {}
     
     open func rotate(with event: NSEvent) {}
