@@ -17,11 +17,12 @@ open class ViewController: NSViewController {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
+                renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
             }
         }
     }
         
-    open var renderer: Renderer? = nil {
+    open var renderer: Renderer? {
         willSet {
             if let mtkView = self.mtkView, let _ = self.renderer {
                 mtkView.delegate = nil
@@ -31,6 +32,7 @@ open class ViewController: NSViewController {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
+                renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
             }
         }
     }
@@ -40,7 +42,7 @@ open class ViewController: NSViewController {
     open var keyUpHandler: Any?
     open var flagsChangedHandler: Any?
     
-    open override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupEvents()
@@ -61,9 +63,9 @@ open class ViewController: NSViewController {
         }
     }
     
-    open override var acceptsFirstResponder: Bool { return true }
-    open override func becomeFirstResponder() -> Bool { return true }
-    open override func resignFirstResponder() -> Bool { return true }
+    override open var acceptsFirstResponder: Bool { return true }
+    override open func becomeFirstResponder() -> Bool { return true }
+    override open func resignFirstResponder() -> Bool { return true }
     
     open func setupEvents() {
         self.view.allowedTouchTypes = .indirect
@@ -84,12 +86,12 @@ open class ViewController: NSViewController {
         
         DistributedNotificationCenter.default.addObserver(
             self,
-            selector: #selector(updateAppearance),
+            selector: #selector(self.updateAppearance),
             name: Notification.Name("AppleInterfaceThemeChangedNotification"),
             object: nil
         )
         
-        updateAppearance()
+        self.updateAppearance()
     }
     
     @objc func updateAppearance() {
@@ -130,7 +132,7 @@ open class ViewController: NSViewController {
         }
         
         var forgeDevice = defaultDevice
-        if !lowPower {
+        if !self.lowPower {
             let devices = MTLCopyAllDevices()
             for device in devices {
                 if !device.isLowPower {
@@ -149,154 +151,154 @@ open class ViewController: NSViewController {
         renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
     }
     
-    open override func touchesBegan(with event: NSEvent) {
+    override open func touchesBegan(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.touchesBegan(with: event)
         }
     }
     
-    open override func touchesEnded(with event: NSEvent) {
+    override open func touchesEnded(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.touchesEnded(with: event)
         }
     }
     
-    open override func touchesMoved(with event: NSEvent) {
+    override open func touchesMoved(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.touchesMoved(with: event)
         }
     }
     
-    open override func touchesCancelled(with event: NSEvent) {
+    override open func touchesCancelled(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.touchesCancelled(with: event)
         }
     }
     
-    open override func mouseMoved(with event: NSEvent) {
+    override open func mouseMoved(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseMoved(with: event)
         }
     }
     
-    open override func mouseDown(with event: NSEvent) {
+    override open func mouseDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseDown(with: event)
         }
     }
     
-    open override func mouseDragged(with event: NSEvent) {
+    override open func mouseDragged(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseDragged(with: event)
         }
     }
     
-    open override func mouseUp(with event: NSEvent) {
+    override open func mouseUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseUp(with: event)
         }
     }
     
-    open override func rightMouseDown(with event: NSEvent) {
+    override open func rightMouseDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.rightMouseDown(with: event)
         }
     }
     
-    open override func rightMouseDragged(with event: NSEvent) {
+    override open func rightMouseDragged(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.rightMouseDragged(with: event)
         }
     }
     
-    open override func rightMouseUp(with event: NSEvent) {
+    override open func rightMouseUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.rightMouseUp(with: event)
         }
     }
     
-    open override func otherMouseDown(with event: NSEvent) {
+    override open func otherMouseDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.otherMouseDown(with: event)
         }
     }
     
-    open override func otherMouseDragged(with event: NSEvent) {
+    override open func otherMouseDragged(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.otherMouseDragged(with: event)
         }
     }
     
-    open override func otherMouseUp(with event: NSEvent) {
+    override open func otherMouseUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.otherMouseUp(with: event)
         }
     }
     
-    open override func mouseEntered(with event: NSEvent) {
+    override open func mouseEntered(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseEntered(with: event)
         }
     }
     
-    open override func mouseExited(with event: NSEvent) {
+    override open func mouseExited(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.mouseExited(with: event)
         }
     }
     
-    open override func magnify(with event: NSEvent) {
+    override open func magnify(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.magnify(with: event)
         }
     }
     
-    open override func rotate(with event: NSEvent) {
+    override open func rotate(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.rotate(with: event)
         }
     }
     
-    open override func scrollWheel(with event: NSEvent) {
+    override open func scrollWheel(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.scrollWheel(with: event)
         }
     }
     
-    open override func keyDown(with event: NSEvent) {
+    override open func keyDown(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.keyDown(with: event)
         }
     }
     
-    open override func keyUp(with event: NSEvent) {
+    override open func keyUp(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.keyUp(with: event)
         }
     }
     
-    open override func flagsChanged(with event: NSEvent) {
+    override open func flagsChanged(with event: NSEvent) {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.flagsChanged(with: event)
