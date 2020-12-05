@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                   = "Forge"
-  spec.version                = "1.0.7"
+  spec.version                = "1.0.8"
   spec.summary                = "Get up and rendering with Metal via Metalkit without worrying about triple buffering / semaphores"
   spec.description            = <<-DESC
   Forge's Renderer class sets up triple buffering rendering so you don't have to. You also get nice Cinder / Processing / Openframeworks functions you can hook into and do stuff.
