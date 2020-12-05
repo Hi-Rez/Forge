@@ -20,14 +20,14 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     public weak var mtkView: MTKView! {
         didSet {
-            if mtkView != nil {
-                self.device = mtkView.device!
+            if self.mtkView != nil {
+                self.device = self.mtkView.device!
                 
                 guard let queue = self.device.makeCommandQueue() else { return }
                 self.commandQueue = queue
                 
-                mtkView.depthStencilPixelFormat = .depth32Float_stencil8
-                mtkView.colorPixelFormat = .bgra8Unorm
+                self.mtkView.depthStencilPixelFormat = .depth32Float_stencil8
+                self.mtkView.colorPixelFormat = .bgra8Unorm
                 
                 self.setupMtkView(self.mtkView)
                 
@@ -38,7 +38,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         
     public var appearance: Appearance = .dark {
         didSet {
-            updateAppearance()
+            self.updateAppearance()
         }
     }
     
@@ -72,8 +72,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     var inFlightSemaphoreWait = 0
     var inFlightSemaphoreRelease = 0
         
-    public override init()
-    {
+    override public init() {
         super.init()
     }
     
@@ -82,7 +81,7 @@ open class Renderer: NSObject, MTKViewDelegate {
 //        print("forge dealloc release: \(inFlightSemaphoreRelease)")
 //        print("forge dealloc count: \(inFlightSemaphoreCount)")
         let delta = inFlightSemaphoreWait + inFlightSemaphoreRelease
-        for _ in 0..<delta {
+        for _ in 0 ..< delta {
             inFlightSemaphore.signal()
         }
     }
@@ -91,6 +90,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func draw(in view: MTKView) {
         guard let commandBuffer = self.preDraw() else { return }
+        self.update()
         self.draw(view, commandBuffer)
         self.postDraw(view, commandBuffer)
     }
@@ -101,25 +101,20 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
-        inFlightSemaphoreWait += 1
-        
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
-
-        commandBuffer.addCompletedHandler { [weak self] _ in
-            if let strongSelf = self {
-                strongSelf.inFlightSemaphore.signal()
-                strongSelf.inFlightSemaphoreRelease -= 1
-            }
-        }
-        
-        self.update()
-        
-        return commandBuffer
+        self.inFlightSemaphoreWait += 1
+        return self.commandQueue.makeCommandBuffer()
     }
     
     open func postDraw(_ view: MTKView, _ commandBuffer: MTLCommandBuffer) {
         guard let drawable = view.currentDrawable else { return }
         commandBuffer.present(drawable)
+        let blockSemaphone = self.inFlightSemaphore
+        commandBuffer.addCompletedHandler { [weak self] _ in
+            blockSemaphone.signal()
+            if let strongSelf = self {
+                strongSelf.inFlightSemaphoreRelease -= 1
+            }
+        }
         commandBuffer.commit()
     }
     
