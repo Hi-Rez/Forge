@@ -12,7 +12,7 @@ import MetalKit
 // Our macOS specific view controller
 open class ViewController: NSViewController {
     open var lowPower: Bool = false
-    open var mtkView: MTKView? {
+    @objc open var mtkView: MTKView? {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
@@ -22,7 +22,7 @@ open class ViewController: NSViewController {
         }
     }
         
-    open var renderer: Renderer? {
+    @objc open var renderer: Renderer? {
         willSet {
             if let mtkView = self.mtkView, let _ = self.renderer {
                 mtkView.delegate = nil
