@@ -33,6 +33,7 @@ open class ViewController: NSViewController {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
                 renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                updateAppearance()
             }
         }
     }

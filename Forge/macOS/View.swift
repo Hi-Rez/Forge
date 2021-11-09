@@ -29,7 +29,7 @@ open class View: MTKView {
     open override func performKeyEquivalent(with event: NSEvent) -> Bool {
         let modifiers: NSEvent.ModifierFlags = [.capsLock, .control, .option, .command, .numericPad, .help, .function]
         let result = event.modifierFlags.isDisjoint(with: modifiers)
-        return result
+        return result || (event.keyCode > 122 && event.keyCode < 127)
     }
     
     open override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
