@@ -20,7 +20,7 @@ import MetalKit
     @objc optional func concludeDragOperation(_ sender: NSDraggingInfo?)
 }
 
-open class View: MTKView {
+open class MetalView: MTKView {
     open weak var dragDelegate: DragDelegate?
     
     open override func viewDidMoveToWindow() {

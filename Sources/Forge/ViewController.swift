@@ -224,7 +224,7 @@ open class ViewController: NSViewController {
     }
     
     open override func loadView() {
-        view = View()
+        view = MetalView()
         view.autoresizingMask = [.width, .height]
     }
     
