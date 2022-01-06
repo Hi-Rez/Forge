@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                   = "Forge"
-  spec.version                = "1.0.9"
+  spec.version                = "1.1.0"
   spec.summary                = "Get up and rendering with Metal via Metalkit without worrying about triple buffering / semaphores"
   spec.description            = <<-DESC
   Forge's Renderer class sets up triple buffering rendering so you don't have to. You also get nice Cinder / Processing / Openframeworks functions you can hook into and do stuff.
@@ -14,13 +14,9 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target  = "13.0"
   spec.tvos.deployment_target = "13.0"
 
-  spec.osx.source_files       = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/macOS/**/*.{h,m,swift}"
-  spec.ios.source_files       = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/iOS/**/*.{h,m,swift}"
-  spec.tvos.source_files      = "Forge/*.h", "Forge/Shared/**/*.{h,m,swift}", "Forge/tvOS/**/*.{h,m,swift}", "Forge/iOS/ViewController.swift"
-
-  spec.osx.resources          = "Forge/macOS/*.xib"
-  spec.ios.resources          = "Forge/iOS/*.xib"
-  spec.tvos.resources         = "Forge/tvOS/*.xib"
+  spec.osx.source_files       = "Sources/Forge/*.swift"
+  spec.ios.source_files       = "Sources/Forge/*.swift"
+  spec.tvos.source_files      = "Sources/Forge/*.swift"
 
   spec.frameworks             = "Metal", "MetalKit", "SwiftUI"
   spec.module_name            = "Forge"

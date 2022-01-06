@@ -8,6 +8,8 @@
 
 import MetalKit
 
+#if os(macOS)
+
 @objc public protocol DragDelegate: AnyObject {
     @objc optional func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation
     @objc optional func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation
@@ -76,3 +78,5 @@ open class View: MTKView {
         return true
     }
 }
+
+#endif

@@ -1,17 +1,188 @@
 //
 //  ViewController.swift
-//  Forge
+//  Forge-iOS
 //
-//  Created by Reza Ali on 8/19/19.
-//  Copyright © 2019 Reza Ali. All rights reserved.
+//  Created by Reza Ali on 10/15/19.
 //
 
-import Cocoa
 import MetalKit
 
+#if os(iOS) || os(tvOS)
+
+import UIKit
+
+open class ViewController: UIViewController {
+    open var lowPower: Bool = false
+    open var autoRotate: Bool = true
+    
+    open var mtkView: MTKView? {
+        didSet {
+            if let mtkView = self.mtkView, let renderer = self.renderer {
+                renderer.mtkView = mtkView
+                mtkView.delegate = renderer
+            }
+        }
+    }
+    
+    open var renderer: Renderer? {
+        willSet {
+            if let mtkView = self.mtkView, let _ = self.renderer {
+                mtkView.delegate = nil
+            }
+        }
+        didSet {
+            if let mtkView = self.mtkView, let renderer = self.renderer {
+                renderer.mtkView = mtkView
+                if self.traitCollection.userInterfaceStyle == .dark {
+                    renderer.appearance = .dark
+                }
+                else if self.traitCollection.userInterfaceStyle == .light {
+                    renderer.appearance = .light
+                }
+                else if self.traitCollection.userInterfaceStyle == .unspecified {
+                    renderer.appearance = .light
+                }
+                mtkView.delegate = renderer
+            }
+        }
+    }
+    
+    open var keyDownHandler: Any?
+    open var keyUpHandler: Any?
+    
+    public init(renderer: Renderer?) {
+        super.init(nibName: nil, bundle: nil)
+        self.renderer = renderer
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    open override func loadView() {
+        view = MTKView()
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupView()
+        self.setupRenderer()
+        self.setupEvents()
+    }
+    
+    open func setupEvents() {}
+    
+    open func removeEvents() {}
+    
+    open func setupView() {
+        #if os(iOS)
+            view.isMultipleTouchEnabled = true
+        #endif
+        
+        guard let mtkView = self.view as? MTKView else {
+            print("View attached to ViewController is not an MTKView")
+            return
+        }
+        guard let defaultDevice = MTLCreateSystemDefaultDevice() else {
+            print("Metal is not supported on this device")
+            return
+        }
+        
+        mtkView.device = defaultDevice
+        self.mtkView = mtkView
+    }
+    
+    open func setupRenderer() {
+        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        if self.traitCollection.userInterfaceStyle == .dark {
+            renderer.appearance = .dark
+        }
+        else if self.traitCollection.userInterfaceStyle == .light {
+            renderer.appearance = .light
+        }
+        else if self.traitCollection.userInterfaceStyle == .unspecified {
+            renderer.appearance = .light
+        }
+        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+    }
+    
+    open func resize() {
+        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        let frame = view.frame
+        let scale = UIScreen.main.scale
+        let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
+        renderer.mtkView.drawableSize = pixels
+        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+    }
+    
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.resize()
+    }
+    
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.resize()
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard let renderer = self.renderer else { return }
+        
+        if #available(iOS 13.0, *) {
+            if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                if traitCollection.userInterfaceStyle == .dark {
+                    renderer.appearance = .dark
+                }
+                else {
+                    renderer.appearance = .light
+                }
+            }
+        }
+        else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    #if os(iOS)
+    open override var shouldAutorotate: Bool { return self.autoRotate }
+    #endif
+    
+    deinit {
+        removeEvents()
+    }
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let renderer = self.renderer else { return }
+        renderer.touchesBegan(touches, with: event)
+    }
+    
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let renderer = self.renderer else { return }
+        renderer.touchesMoved(touches, with: event)
+    }
+    
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let renderer = self.renderer else { return }
+        renderer.touchesEnded(touches, with: event)
+    }
+    
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let renderer = self.renderer else { return }
+        renderer.touchesCancelled(touches, with: event)
+    }
+}
+
+#elseif os(macOS)
+
+import Cocoa
 // Our macOS specific view controller
 open class ViewController: NSViewController {
+    
     open var lowPower: Bool = false
+    
     @objc open var mtkView: MTKView? {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
@@ -43,9 +214,24 @@ open class ViewController: NSViewController {
     open var keyUpHandler: Any?
     open var flagsChangedHandler: Any?
     
+    public init(renderer: Renderer?) {
+        super.init(nibName: nil, bundle: nil)
+        self.renderer = renderer
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    open override func loadView() {
+        view = View()
+        view.autoresizingMask = [.width, .height]
+    }
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.setupRenderer()
         self.setupEvents()
         self.setupTracking()
     }
@@ -97,7 +283,6 @@ open class ViewController: NSViewController {
     
     @objc func updateAppearance() {
         guard let renderer = self.renderer else { return }
-        
         if let _ = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") {
             renderer.appearance = .dark
         }
@@ -311,3 +496,5 @@ open class ViewController: NSViewController {
         removeEvents()
     }
 }
+
+#endif

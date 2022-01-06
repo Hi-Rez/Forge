@@ -8,6 +8,7 @@
 import SwiftUI
 
 #if os(macOS)
+
 public struct ForgeView: NSViewControllerRepresentable {
     public var renderer: Forge.Renderer
     public typealias NSViewControllerType = Forge.ViewController
@@ -17,9 +18,7 @@ public struct ForgeView: NSViewControllerRepresentable {
     }
     
     public func makeNSViewController(context: Self.Context) -> Self.NSViewControllerType {
-        let vc = Forge.ViewController(nibName: .init("ViewController"), bundle: Bundle(for: Forge.ViewController.self))
-        vc.renderer = renderer
-        return vc
+        return Forge.ViewController(renderer: renderer)
     }
     
     public func updateNSViewController(_ nsViewController: Self.NSViewControllerType, context: Self.Context) {
@@ -48,9 +47,7 @@ public struct ForgeView: UIViewControllerRepresentable {
     }
     
     public func makeUIViewController(context: Self.Context) -> Self.UIViewControllerType {
-        let vc = Forge.ViewController(nibName: .init("ViewController"), bundle: Bundle(for: Forge.ViewController.self))
-        vc.renderer = renderer
-        return vc
+        return Forge.ViewController(renderer: renderer)
     }
     
     public func updateUIViewController(_ uiViewController: Self.UIViewControllerType, context: Self.Context) {

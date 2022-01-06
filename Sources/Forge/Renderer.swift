@@ -89,8 +89,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func setupMtkView(_ metalKitView: MTKView) {}
     
     open func draw(in view: MTKView) {
-        guard let commandBuffer = self.preDraw() else { return }
-        self.update()
+        guard let _ = view.currentDrawable, let commandBuffer = self.preDraw() else { return }
         self.draw(view, commandBuffer)
         self.postDraw(view, commandBuffer)
     }
@@ -101,6 +100,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     
     open func preDraw() -> MTLCommandBuffer? {
         _ = self.inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
+        self.update()
         self.inFlightSemaphoreWait += 1
         return self.commandQueue.makeCommandBuffer()
     }
