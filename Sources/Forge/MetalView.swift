@@ -23,11 +23,6 @@ import MetalKit
 open class MetalView: MTKView {
     open weak var dragDelegate: DragDelegate?
     
-    open override func viewDidMoveToWindow() {
-        super.viewDidMoveToWindow()
-        delegate?.mtkView(self, drawableSizeWillChange: drawableSize)
-    }
-    
     open override func performKeyEquivalent(with event: NSEvent) -> Bool {
         let modifiers: NSEvent.ModifierFlags = [.capsLock, .control, .option, .command, .numericPad, .help, .function]
         let result = event.modifierFlags.isDisjoint(with: modifiers)

@@ -77,6 +77,7 @@ open class Renderer: NSObject, MTKViewDelegate {
     }
     
     deinit {
+        print("ForgeRenderer deinit")
 //        print("forge dealloc wait: \(inFlightSemaphoreWait)")
 //        print("forge dealloc release: \(inFlightSemaphoreRelease)")
 //        print("forge dealloc count: \(inFlightSemaphoreCount)")

@@ -15,11 +15,23 @@ open class ViewController: UIViewController {
     open var lowPower: Bool = false
     open var autoRotate: Bool = true
     
+    var drawableSize: CGSize = .zero {
+        didSet {
+            guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
+            if drawableSize.width != oldValue.width || drawableSize.height != oldValue.height {
+                if drawableSize.width > 0, drawableSize.height > 0 {
+                    renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                }
+            }
+        }
+    }
+    
     open var mtkView: MTKView? {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
+                drawableSize = mtkView.drawableSize
             }
         }
     }
@@ -43,6 +55,7 @@ open class ViewController: UIViewController {
                     renderer.appearance = .light
                 }
                 mtkView.delegate = renderer
+                drawableSize = mtkView.drawableSize
             }
         }
     }
@@ -104,7 +117,7 @@ open class ViewController: UIViewController {
         else if self.traitCollection.userInterfaceStyle == .unspecified {
             renderer.appearance = .light
         }
-        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+        drawableSize = mtkView.drawableSize
     }
     
     open func resize() {
@@ -113,7 +126,7 @@ open class ViewController: UIViewController {
         let scale = UIScreen.main.scale
         let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
         renderer.mtkView.drawableSize = pixels
-        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+        drawableSize = mtkView.drawableSize
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -151,6 +164,8 @@ open class ViewController: UIViewController {
     #endif
     
     deinit {
+        mtkView?.delegate = nil
+        renderer =  nil
         removeEvents()
     }
     
@@ -182,13 +197,24 @@ import Cocoa
 open class ViewController: NSViewController {
     
     open var lowPower: Bool = false
+   
+    var drawableSize: CGSize = .zero {
+        didSet {
+            guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
+            if drawableSize.width != oldValue.width || drawableSize.height != oldValue.height {
+                if drawableSize.width > 0, drawableSize.height > 0 {
+                    renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                }
+            }
+        }
+    }
     
     @objc open var mtkView: MTKView? {
         didSet {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
-                renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                drawableSize = mtkView.drawableSize
             }
         }
     }
@@ -203,7 +229,7 @@ open class ViewController: NSViewController {
             if let mtkView = self.mtkView, let renderer = self.renderer {
                 renderer.mtkView = mtkView
                 mtkView.delegate = renderer
-                renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+                drawableSize = mtkView.drawableSize
                 updateAppearance()
             }
         }
@@ -214,8 +240,9 @@ open class ViewController: NSViewController {
     open var keyUpHandler: Any?
     open var flagsChangedHandler: Any?
     
-    public init(renderer: Renderer?) {
+    public init(renderer: Renderer?, lowPower: Bool = false) {
         super.init(nibName: nil, bundle: nil)
+        self.lowPower = lowPower
         self.renderer = renderer
     }
     
@@ -333,8 +360,8 @@ open class ViewController: NSViewController {
     }
     
     open func setupRenderer() {
-        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
-        renderer.mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
+        guard let mtkView = self.mtkView else { return }
+        drawableSize = mtkView.drawableSize
     }
     
     override open func touchesBegan(with event: NSEvent) {
@@ -494,6 +521,9 @@ open class ViewController: NSViewController {
     deinit {
         removeTracking()
         removeEvents()
+        renderer?.mtkView = nil
+        mtkView?.delegate = nil
+        renderer = nil
     }
 }
 
