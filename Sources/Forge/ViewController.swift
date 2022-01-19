@@ -32,6 +32,7 @@ open class ViewController: UIViewController {
         willSet {
             if let mtkView = self.mtkView, let _ = self.renderer {
                 mtkView.delegate = nil
+                drawableSize = .zero
             }
         }
         didSet {
@@ -203,6 +204,7 @@ open class ViewController: NSViewController {
         willSet {
             if let mtkView = self.mtkView, let _ = self.renderer {
                 mtkView.delegate = nil
+                drawableSize = .zero
             }
         }
         didSet {
