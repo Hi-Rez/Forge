@@ -151,7 +151,9 @@ open class ViewController: UIViewController {
         }
     }
     
+    #if os(iOS)
     override open var shouldAutorotate: Bool { return self.autoRotate }
+    #endif
     
     deinit {
         mtkView?.delegate = nil
