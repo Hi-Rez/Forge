@@ -117,17 +117,12 @@ open class ViewController: UIViewController {
         let frame = view.frame
         let scale = UIScreen.main.scale
         let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
-        renderer.mtkView.drawableSize = pixels
+        mtkView.drawableSize = pixels
         self.drawableSize = mtkView.drawableSize
     }
     
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.resize()
-    }
-    
-    override open func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         self.resize()
     }
     
