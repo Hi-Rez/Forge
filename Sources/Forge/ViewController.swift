@@ -113,7 +113,7 @@ open class ViewController: UIViewController {
     }
     
     open func resize() {
-        guard let renderer = self.renderer, let mtkView = self.mtkView else { return }
+        guard let mtkView = self.mtkView else { return }
         let frame = view.frame
         let scale = UIScreen.main.scale
         let pixels = CGSize(width: frame.width * scale, height: frame.height * scale)
