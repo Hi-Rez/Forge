@@ -10,67 +10,109 @@ import MetalKit
 
 #if os(macOS)
 
-@objc public protocol DragDelegate: AnyObject {
-    @objc optional func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation
-    @objc optional func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation
-    @objc optional func draggingEnded(_ sender: NSDraggingInfo)
-    @objc optional func draggingExited(_ sender: NSDraggingInfo?)
-    @objc optional func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool
-    @objc optional func performDragOperation(_ sender: NSDraggingInfo) -> Bool
-    @objc optional func concludeDragOperation(_ sender: NSDraggingInfo?)
+public protocol DragDelegate: AnyObject {
+    func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation
+    func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation
+    func draggingEnded(_ sender: NSDraggingInfo)
+    func draggingExited(_ sender: NSDraggingInfo?)
+    func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool
+    func performDragOperation(_ sender: NSDraggingInfo) -> Bool
+    func concludeDragOperation(_ sender: NSDraggingInfo?)
+}
+
+public protocol TouchDelegate: AnyObject {
+    func touchesBegan(with event: NSEvent)
+    func touchesMoved(with event: NSEvent)
+    func touchesEnded(with event: NSEvent)
+    func touchesCancelled(with event: NSEvent)
 }
 
 open class MetalView: MTKView {
     open weak var dragDelegate: DragDelegate?
+    open weak var touchDelegate: TouchDelegate?
     
-    open override func performKeyEquivalent(with event: NSEvent) -> Bool {
+    override public init(frame frameRect: CGRect, device: MTLDevice?) {
+        super.init(frame: frameRect, device: device)
+        allowedTouchTypes = [.indirect]
+        wantsRestingTouches = false
+    }
+    
+    public required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK: - Key Equivalent
+    
+    override open func performKeyEquivalent(with event: NSEvent) -> Bool {
         let modifiers: NSEvent.ModifierFlags = [.capsLock, .control, .option, .command, .numericPad, .help, .function]
         let result = event.modifierFlags.isDisjoint(with: modifiers)
         return result || (event.keyCode > 122 && event.keyCode < 127)
     }
     
-    open override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        if let dd = dragDelegate, let result = dd.draggingEntered?(sender) {
-            return result
+    // MARK: - Drag & Drop
+    
+    override open func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        if let dd = dragDelegate {
+            return dd.draggingEntered(sender)
         }
         return []
     }
     
-    open override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-        if let dd = dragDelegate, let result = dd.draggingUpdated?(sender) {
-            return result
+    override open func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+        if let dd = dragDelegate {
+            return dd.draggingUpdated(sender)
         }
         return []
     }
     
-    open override func draggingEnded(_ sender: NSDraggingInfo) {
-        dragDelegate?.draggingEnded?(sender)
+    override open func draggingEnded(_ sender: NSDraggingInfo) {
+        dragDelegate?.draggingEnded(sender)
     }
     
-    open override func draggingExited(_ sender: NSDraggingInfo?) {
-        dragDelegate?.draggingExited?(sender)
+    override open func draggingExited(_ sender: NSDraggingInfo?) {
+        dragDelegate?.draggingExited(sender)
     }
     
-    open override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let dd = dragDelegate, let result = dd.prepareForDragOperation?(sender) {
-            return result
+    override open func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        if let dd = dragDelegate {
+            return dd.prepareForDragOperation(sender)
         }
         return false
     }
     
-    open override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        if let dd = dragDelegate, let result = dd.performDragOperation?(sender) {
-            return result
+    override open func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        if let dd = dragDelegate {
+            return dd.performDragOperation(sender)
         }
         return false
     }
     
-    open override func concludeDragOperation(_ sender: NSDraggingInfo?) {
-        dragDelegate?.concludeDragOperation?(sender)
+    override open func concludeDragOperation(_ sender: NSDraggingInfo?) {
+        dragDelegate?.concludeDragOperation(sender)
     }
     
-    open override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+    // MARK: - Mouse
+    
+    override open func acceptsFirstMouse(for event: NSEvent?) -> Bool {
         return true
+    }
+    
+    // MARK: - Touches
+    
+    override open func touchesBegan(with event: NSEvent) {
+        touchDelegate?.touchesBegan(with: event)
+    }
+    
+    override open func touchesMoved(with event: NSEvent) {
+        touchDelegate?.touchesMoved(with: event)
+    }
+    
+    override open func touchesEnded(with event: NSEvent) {
+        touchDelegate?.touchesEnded(with: event)
+    }
+    
+    override open func touchesCancelled(with event: NSEvent) {
+        touchDelegate?.touchesCancelled(with: event)
     }
 }
 
