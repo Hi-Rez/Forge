@@ -64,7 +64,7 @@ open class ViewController: UIViewController {
         self.setupEvents()
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupRenderer()
     }
@@ -73,11 +73,10 @@ open class ViewController: UIViewController {
         guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
         renderer.mtkView = mtkView
         self.drawableSize = mtkView.drawableSize
-        self.updateAppearance()
         mtkView.delegate = renderer
     }
     
-    func updateAppearance(){
+    func updateAppearance() {
         guard let renderer = renderer else { return }
         if self.traitCollection.userInterfaceStyle == .dark {
             renderer.appearance = .dark
@@ -128,22 +127,7 @@ open class ViewController: UIViewController {
     
     override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
-        guard let renderer = self.renderer else { return }
-        
-        if #available(iOS 13.0, *) {
-            if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-                if traitCollection.userInterfaceStyle == .dark {
-                    renderer.appearance = .dark
-                }
-                else {
-                    renderer.appearance = .light
-                }
-            }
-        }
-        else {
-            // Fallback on earlier versions
-        }
+        self.updateAppearance()
     }
     
     #if os(iOS)
@@ -231,14 +215,14 @@ open class ViewController: NSViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupEvents()
-        setupTracking()
+        self.setupView()
+        self.setupEvents()
+        self.setupTracking()
     }
     
     override open func viewWillAppear() {
         super.viewWillAppear()
-        setupRenderer()
+        self.setupRenderer()
     }
     
     open func setupTracking() {
@@ -286,12 +270,8 @@ open class ViewController: NSViewController {
     
     @objc func updateAppearance() {
         guard let renderer = self.renderer else { return }
-        if let _ = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") {
-            renderer.appearance = .dark
-        }
-        else {
-            renderer.appearance = .light
-        }
+        let appleInterfaceStyle: String? = UserDefaults.standard.string(forKey: "AppleInterfaceStyle")
+        renderer.appearance = appleInterfaceStyle == nil ? .light : .dark
     }
     
     open func removeEvents() {
@@ -466,6 +446,13 @@ open class ViewController: NSViewController {
         guard let renderer = self.renderer else { return }
         if event.window == self.view.window {
             renderer.rotate(with: event)
+        }
+    }
+    
+    override open func swipe(with event: NSEvent) {
+        guard let renderer = self.renderer else { return }
+        if event.window == self.view.window {
+            renderer.swipe(with: event)
         }
     }
     
