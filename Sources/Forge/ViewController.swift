@@ -487,9 +487,6 @@ open class ViewController: NSViewController {
     deinit {
         removeTracking()
         removeEvents()
-        renderer?.mtkView = nil
-        mtkView?.delegate = nil
-        renderer = nil
     }
 }
 
