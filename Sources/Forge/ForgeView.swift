@@ -11,14 +11,16 @@ import SwiftUI
 
 public struct ForgeView: NSViewControllerRepresentable {
     public var renderer: Forge.Renderer
+    public var lowPower: Bool
     public typealias NSViewControllerType = Forge.ViewController
 
-    public init(renderer: Forge.Renderer) {
+    public init(renderer: Forge.Renderer, lowPower: Bool = false) {
         self.renderer = renderer
+        self.lowPower = lowPower
     }
 
     public func makeNSViewController(context: Self.Context) -> Self.NSViewControllerType {
-        return Forge.ViewController(renderer: renderer)
+        return Forge.ViewController(renderer: renderer, lowPower: lowPower)
     }
 
     public func updateNSViewController(_ nsViewController: Self.NSViewControllerType, context: Self.Context) {}
@@ -39,14 +41,16 @@ public struct ForgeView: NSViewControllerRepresentable {
 
 public struct ForgeView: UIViewControllerRepresentable {
     public var renderer: Forge.Renderer
+    public var lowPower: Bool
     public typealias UIViewControllerType = Forge.ViewController
 
-    public init(renderer: Forge.Renderer) {
+    public init(renderer: Forge.Renderer, lowPower: Bool = false) {
         self.renderer = renderer
+        self.lowPower = lowPower
     }
 
     public func makeUIViewController(context: Self.Context) -> Self.UIViewControllerType {
-        return Forge.ViewController(renderer: renderer)
+        return Forge.ViewController(renderer: renderer, lowPower: lowPower)
     }
 
     public func updateUIViewController(_ uiViewController: Self.UIViewControllerType, context: Self.Context) {}

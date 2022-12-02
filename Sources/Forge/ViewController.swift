@@ -43,9 +43,10 @@ open class ViewController: UIViewController {
     open var keyDownHandler: Any?
     open var keyUpHandler: Any?
     
-    public init(renderer: Renderer?) {
+    public init(renderer: Renderer?, lowPower: Bool = false) {
         super.init(nibName: nil, bundle: nil)
         self.renderer = renderer
+        self.lowPower = lowPower
     }
     
     @available(*, unavailable)
@@ -69,11 +70,24 @@ open class ViewController: UIViewController {
         self.setupRenderer()
     }
     
+    open override func viewWillDisappear(_ animated: Bool) {
+        self.cleanupRenderer()
+        super.viewWillDisappear(animated)
+    }
+    
     open func setupRenderer() {
         guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
         renderer.mtkView = mtkView
         self.drawableSize = mtkView.drawableSize
+        self.updateAppearance()
         mtkView.delegate = renderer
+    }
+    
+    open func cleanupRenderer() {
+        guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
+        renderer.cleanup()
+        renderer.isSetup = false
+        mtkView.delegate = nil
     }
     
     func updateAppearance() {
@@ -225,6 +239,11 @@ open class ViewController: NSViewController {
         self.setupRenderer()
     }
     
+    open override func viewWillDisappear() {
+        self.cleanupRenderer()
+        super.viewWillDisappear()
+    }
+
     open func setupTracking() {
         let area = NSTrackingArea(rect: self.view.bounds, options: [.activeAlways, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
         self.view.addTrackingArea(area)
@@ -321,6 +340,13 @@ open class ViewController: NSViewController {
         self.drawableSize = mtkView.drawableSize
         self.updateAppearance()
         mtkView.delegate = renderer
+    }
+    
+    open func cleanupRenderer() {
+        guard let mtkView = self.mtkView, let renderer = self.renderer else { return }
+        renderer.cleanup()
+        renderer.isSetup = false
+        mtkView.delegate = nil
     }
     
     override open func touchesBegan(with event: NSEvent) {
@@ -485,6 +511,8 @@ open class ViewController: NSViewController {
     }
     
     deinit {
+        mtkView?.delegate = nil
+        renderer = nil
         removeTracking()
         removeEvents()
     }

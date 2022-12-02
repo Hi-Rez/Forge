@@ -8,7 +8,7 @@
 
 import Metal
 import MetalKit
-import simd 
+import simd
 
 public let maxBuffersInFlight: Int = 3
 
@@ -18,20 +18,22 @@ open class Renderer: NSObject, MTKViewDelegate {
         case light
     }
     
-    public weak var mtkView: MTKView! {
+    public var mtkView: MTKView! {
         didSet {
-            if self.mtkView != nil {
-                self.device = self.mtkView.device!
+            if let mtkView = mtkView {
+                self.device = mtkView.device
                 
                 guard let queue = self.device.makeCommandQueue() else { return }
                 self.commandQueue = queue
                 
-                self.mtkView.depthStencilPixelFormat = .depth32Float_stencil8
-                self.mtkView.colorPixelFormat = .bgra8Unorm
+                mtkView.depthStencilPixelFormat = .depth32Float_stencil8
+                mtkView.colorPixelFormat = .bgra8Unorm
                 
-                self.setupMtkView(self.mtkView)
+                setupMtkView(mtkView)
                 
-                self.setup()
+                setup()
+                
+                isSetup = true
             }
         }
     }
@@ -41,6 +43,8 @@ open class Renderer: NSObject, MTKViewDelegate {
             self.updateAppearance()
         }
     }
+    
+    public var isSetup: Bool = false
     
     public var device: MTLDevice!
     public var commandQueue: MTLCommandQueue!
@@ -83,7 +87,7 @@ open class Renderer: NSObject, MTKViewDelegate {
         }
     }
     
-    open func setupMtkView(_ metalKitView: MTKView) {}
+    open func setupMtkView(_ mtkView: MTKView) {}
     
     open func draw(in view: MTKView) {
         guard let _ = view.currentDrawable, let commandBuffer = self.preDraw() else { return }
@@ -124,6 +128,8 @@ open class Renderer: NSObject, MTKViewDelegate {
     open func resize(_ size: (width: Float, height: Float)) {}
     
     open func updateAppearance() {}
+    
+    open func cleanup() {}
     
     #if os(macOS)
     
