@@ -14,6 +14,7 @@ public let maxBuffersInFlight: Int = 3
 
 open class Renderer: NSObject, MTKViewDelegate {
     public enum Appearance {
+        case unknown
         case dark
         case light
     }
@@ -29,16 +30,16 @@ open class Renderer: NSObject, MTKViewDelegate {
                 mtkView.depthStencilPixelFormat = .depth32Float_stencil8
                 mtkView.colorPixelFormat = .bgra8Unorm
                 
-                setupMtkView(mtkView)
+                self.setupMtkView(mtkView)
                 
-                setup()
+                self.setup()
                 
-                isSetup = true
+                self.isSetup = true
             }
         }
     }
         
-    public var appearance: Appearance = .dark {
+    public var appearance: Appearance = .unknown {
         didSet {
             self.updateAppearance()
         }
